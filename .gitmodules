@@ -1,0 +1,9 @@
+[submodule "dnas/community-currency/zomes/transactor"]
+	path = dnas/community-currency/zomes/transactor
+	url = https://github.com/holochain-open-dev/mutual-credit
+[submodule "dnas/community-currency/zomes/social-triangulation"]
+	path = dnas/community-currency/zomes/social-triangulation
+	url = https://github.com/holochain-open-dev/social-triangulation
+[submodule "dnas/lobby/zomes/profiles"]
+	path = dnas/lobby/zomes/profiles
+	url = https://github.com/holochain-open-dev/profiles-zome
