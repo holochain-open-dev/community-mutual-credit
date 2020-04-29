@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNEXT",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "lib": ["es2017", "dom"],
+    "allowJs": true,
+    "checkJs": true,
+    "strict": false,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "noImplicitThis": false,
+    "alwaysStrict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules/!(@open-wc)"]
+}
