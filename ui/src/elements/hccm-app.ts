@@ -9,6 +9,16 @@ export class CommunityCurrencyApp extends moduleConnect(LitElement) {
     return sharedStyles;
   }
 
+  static get routes() {
+    return [
+      {
+        name: 'home',
+        pattern: '',
+        data: { title: 'Home' },
+      },
+    ];
+  }
+
   render() {
     return html` <module-container>
       <hcpf-set-username></hcpf-set-username>
