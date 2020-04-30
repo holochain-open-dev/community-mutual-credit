@@ -1,0 +1,53 @@
+bridges = []
+persistence_dir = ''
+ui_bundles = []
+ui_interfaces = []
+
+[[agents]]
+id = 'bob-agent'
+name = 'bob'
+public_address = 'HcSCjvyaY5Mkzazdcx655IY6X54uMmVRsfK8x4mms8FT8n7gsEGqzpf3I4xc6ci'
+keystore_file = './bob.key'
+
+[[dnas]]
+file = './lobby/dist/lobby.dna.json'
+hash = 'QmV9dJBEfZFdaqQMC8WsR3YsSVxBbphDSJfbNRRqFebtQp'
+id = 'lobby-dna'
+
+[[dnas]]
+file = './community-currency/dist/community-currency.dna.json'
+hash = 'Qmep45Zx8oEXRxkCLjyAJbmmAqo7biRb3zCpK5qXPoz4AQ'
+id = 'mutual-credit-dna'
+
+[[instances]]
+agent = 'bob-agent'
+dna = 'lobby-dna'
+id = 'lobby-instance'
+
+[instances.storage]
+type = 'memory'
+
+[[interfaces]]
+admin = true
+id = 'websocket-interface'
+
+[[interfaces.instances]]
+id = 'lobby-instance'
+
+[interfaces.driver]
+port = 8889
+type = 'websocket'
+
+[logger]
+state_dump = true
+type = 'debug'
+
+[logger.rules]
+rules = []
+
+[passphrase_service]
+type = 'cmd'
+
+[signals]
+consistency = false
+trace = false

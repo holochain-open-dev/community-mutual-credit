@@ -1,7 +1,11 @@
 {
   "scripts": {
     "build": "rimraf dist && rollup -c rollup.config.ts",
-    "start": "webpack-dev-server --mode=development --open"
+    "start": "webpack-dev-server --mode=development --open",
+    "dev": "concurrently \"npm run hc:start\" \"npm start\"",
+    "hc:start": "concurrently \"sim2h_server\" \"npm run hc:alice\" \"npm run hc:bob\"",
+    "hc:alice": "cd ../dnas && holochain -c alice-conductor-config.toml",
+    "hc:bob": "cd ../dnas && holochain -c bob-conductor-config.toml"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -10,7 +14,7 @@
     "babel-loader": "^8.1.0",
     "babel-polyfill": "^6.26.0",
     "base-href-webpack-plugin": "^2.0.0",
-    "concurrently": "^5.1.0",
+    "concurrently": "^5.2.0",
     "copy-webpack-plugin": "^5.1.1",
     "es-dev-server": "^1.5.0",
     "html-webpack-plugin": "^3.2.0",
@@ -24,7 +28,7 @@
   },
   "name": "holochain-community-currency-app",
   "version": "0.1.0",
-  "author": "holochain-playground",
+  "author": "guillem.cordoba@gmail.com",
   "license": "MIT",
   "dependencies": {
     "@authentic/mwc-card": "^0.9.0",
@@ -48,7 +52,6 @@
     "@uprtcl/graphql": "0.0.7-alpha.2",
     "@uprtcl/holochain-provider": "0.0.7-alpha.2",
     "@uprtcl/micro-orchestrator": "0.0.7-alpha.2",
-    "lit-element": "^2.0.1",
-    "lit-html": "^1.0.0"
+    "lit-element": "^2.2.3"
   }
 }

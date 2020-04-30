@@ -1,0 +1,64 @@
+bridges = []
+persistence_dir = ''
+ui_bundles = []
+ui_interfaces = []
+
+[[agents]]
+id = 'alice-agent'
+name = 'alice'
+public_address = 'HcSCipJrCpZzn5ga45eP9K3qhxHJiabtszGX6nsOkfkdtgeaVc7ydBeIXagn7pr'
+keystore_file = './alice.key'
+
+[[dnas]]
+file = './lobby/dist/lobby.dna.json'
+hash = 'QmV9dJBEfZFdaqQMC8WsR3YsSVxBbphDSJfbNRRqFebtQp'
+id = 'lobby-dna'
+
+[[dnas]]
+file = './community-currency/dist/community-currency.dna.json'
+hash = 'Qmep45Zx8oEXRxkCLjyAJbmmAqo7biRb3zCpK5qXPoz4AQ'
+id = 'mutual-credit-dna'
+
+[[instances]]
+agent = 'alice-agent'
+dna = 'mutual-credit-dna'
+id = 'mutual-credit-instance'
+
+[instances.storage]
+type = 'memory'
+
+[[instances]]
+agent = 'alice-agent'
+dna = 'lobby-dna'
+id = 'lobby-instance'
+
+[instances.storage]
+type = 'memory'
+
+[[interfaces]]
+admin = true
+id = 'websocket-interface'
+
+[[interfaces.instances]]
+id = 'lobby-instance'
+
+[[interfaces.instances]]
+id = 'mutual-credit-instance'
+
+[interfaces.driver]
+port = 8888
+type = 'websocket'
+
+[logger]
+state_dump = true
+type = 'debug'
+
+[logger.rules]
+rules = []
+
+[passphrase_service]
+type = 'cmd'
+
+[signals]
+consistency = false
+trace = false
