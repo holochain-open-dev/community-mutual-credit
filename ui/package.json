@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "rimraf dist && rollup -c rollup.config.ts",
+    "build": "rimraf dist && webpack",
     "start": "webpack-dev-server --mode=development --open",
     "dev": "concurrently \"npm run hc:start\" \"npm start\"",
     "hc:start": "concurrently \"sim2h_server\" \"npm run hc:alice\" \"npm run hc:bob\"",
