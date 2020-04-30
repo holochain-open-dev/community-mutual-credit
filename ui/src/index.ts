@@ -1,4 +1,4 @@
-import { MicroOrchestrator } from '@uprtcl/micro-orchestrator';
+import { MicroOrchestrator, i18nextBaseModule } from '@uprtcl/micro-orchestrator';
 import { ApolloClientModule } from '@uprtcl/graphql';
 import {
   HolochainConnection,
@@ -17,6 +17,7 @@ import { CommunityCurrencyApp } from './elements/hccm-app';
 
   await orchestrator.loadModules([
     new HolochainConnectionModule(connection),
+    new i18nextBaseModule(),
     new ApolloClientModule(),
     new SocialTriangulationModule('mutual-credit-instance'),
     new MutualCreditModule('mutual-credit-instance'),
