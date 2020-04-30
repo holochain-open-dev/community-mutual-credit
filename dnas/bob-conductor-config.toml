@@ -11,7 +11,7 @@ keystore_file = './bob.key'
 
 [[dnas]]
 file = './lobby/dist/lobby.dna.json'
-hash = 'QmV9dJBEfZFdaqQMC8WsR3YsSVxBbphDSJfbNRRqFebtQp'
+hash = 'QmSagrCgkco3Y4dSoPECBXK7SUAhuboWufuwAxHukPWYDa'
 id = 'lobby-dna'
 
 [[dnas]]
