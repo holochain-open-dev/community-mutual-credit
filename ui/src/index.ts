@@ -1,4 +1,7 @@
-import { MicroOrchestrator, i18nextBaseModule } from '@uprtcl/micro-orchestrator';
+import {
+  MicroOrchestrator,
+  i18nextBaseModule,
+} from '@uprtcl/micro-orchestrator';
 import { ApolloClientModule } from '@uprtcl/graphql';
 import {
   HolochainConnection,
@@ -8,7 +11,9 @@ import { MutualCreditModule } from 'holochain-mutual-credit';
 import { SocialTriangulationModule } from 'holochain-social-triangulation';
 import { ProfilesModule } from 'holochain-profiles';
 
-import { CommunityCurrencyApp } from './elements/hccm-app';
+import { CMApp } from './elements/hccm-app';
+import { CMLogin } from './elements/hccm-login';
+import { CMHome } from './elements/hccm-home';
 
 (async function () {
   const connection = new HolochainConnection({ host: 'ws://localhost:8888' });
@@ -24,5 +29,7 @@ import { CommunityCurrencyApp } from './elements/hccm-app';
     new ProfilesModule('lobby-instance'),
   ]);
 
-  customElements.define('hccm-app', CommunityCurrencyApp);
+  customElements.define('hccm-app', CMApp);
+  customElements.define('hccm-login', CMLogin);
+  customElements.define('hccm-home', CMHome);
 })();

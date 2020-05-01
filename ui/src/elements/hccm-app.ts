@@ -1,28 +1,23 @@
 import { moduleConnect } from '@uprtcl/micro-orchestrator';
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, property, query } from 'lit-element';
 import { sharedStyles } from './sharedStyles';
-import { router } from 'lit-element-router';
+import { setupRouter } from '../router';
 
-@router
-export class CommunityCurrencyApp extends moduleConnect(LitElement) {
+export class CMApp extends moduleConnect(LitElement) {
+  @query('#outlet')
+  outlet: HTMLElement;
+
   static get styles() {
     return sharedStyles;
   }
 
-  static get routes() {
-    return [
-      {
-        name: 'home',
-        pattern: '',
-        data: { title: 'Home' },
-      },
-    ];
+  firstUpdated() {
+    setupRouter(this.outlet);
   }
 
   render() {
     return html` <module-container>
-      <hcpf-set-username></hcpf-set-username>
-      <hcst-agent-list></hcst-agent-list>
+      <div id="outlet"></div>
     </module-container>`;
   }
 }
