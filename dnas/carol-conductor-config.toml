@@ -4,10 +4,10 @@ ui_bundles = []
 ui_interfaces = []
 
 [[agents]]
-id = 'alice-agent'
-name = 'alice'
-public_address = 'HcSCipJrCpZzn5ga45eP9K3qhxHJiabtszGX6nsOkfkdtgeaVc7ydBeIXagn7pr'
-keystore_file = './alice.key'
+id = 'carol-agent'
+name = 'carol'
+public_address = 'HcSCI4JD7ZU43yYaotU95gXInhpjysgpmZfcqyxk3prqmsexaICAZofer3gmumr'
+keystore_file = './carol.key'
 
 [[dnas]]
 file = './lobby/dist/lobby.dna.json'
@@ -20,17 +20,17 @@ hash = 'QmUYTELhmpozqw1vgD8stYEfEgmiP7fkm3xgTkTWGWvvgy'
 id = 'mutual-credit-dna'
 
 [[instances]]
-agent = 'alice-agent'
-dna = 'mutual-credit-dna'
-id = 'mutual-credit-instance'
+agent = 'carol-agent'
+dna = 'lobby-dna'
+id = 'lobby-instance'
 
 [instances.storage]
 type = 'memory'
 
 [[instances]]
-agent = 'alice-agent'
-dna = 'lobby-dna'
-id = 'lobby-instance'
+agent = 'carol-agent'
+dna = 'mutual-credit-dna'
+id = 'mutual-credit-instance'
 
 [instances.storage]
 type = 'memory'
@@ -46,7 +46,7 @@ id = 'lobby-instance'
 id = 'mutual-credit-instance'
 
 [interfaces.driver]
-port = 8888
+port = 8890
 type = 'websocket'
 
 [logger]

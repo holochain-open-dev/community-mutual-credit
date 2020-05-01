@@ -16,7 +16,7 @@ id = 'lobby-dna'
 
 [[dnas]]
 file = './community-currency/dist/community-currency.dna.json'
-hash = 'QmTrbg4e2qoBrtsBt4EwuVijdtS5x14jeNY8Xj8mRJ5Ghv'
+hash = 'QmUYTELhmpozqw1vgD8stYEfEgmiP7fkm3xgTkTWGWvvgy'
 id = 'mutual-credit-dna'
 
 [[instances]]
@@ -27,12 +27,23 @@ id = 'lobby-instance'
 [instances.storage]
 type = 'memory'
 
+[[instances]]
+agent = 'bob-agent'
+dna = 'mutual-credit-dna'
+id = 'mutual-credit-instance'
+
+[instances.storage]
+type = 'memory'
+
 [[interfaces]]
 admin = true
 id = 'websocket-interface'
 
 [[interfaces.instances]]
 id = 'lobby-instance'
+
+[[interfaces.instances]]
+id = 'mutual-credit-instance'
 
 [interfaces.driver]
 port = 8889

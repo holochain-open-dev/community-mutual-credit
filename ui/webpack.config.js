@@ -2,6 +2,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   output: {
@@ -11,8 +12,12 @@ module.exports = {
   resolve: {
     alias: {
       '@uprtcl/graphql': path.resolve('./node_modules/@uprtcl/graphql'),
-      '@uprtcl/holochain-provider': path.resolve('./node_modules/@uprtcl/holochain-provider'),
-      '@uprtcl/micro-orchestrator': path.resolve('./node_modules/@uprtcl/micro-orchestrator'),
+      '@uprtcl/holochain-provider': path.resolve(
+        './node_modules/@uprtcl/holochain-provider'
+      ),
+      '@uprtcl/micro-orchestrator': path.resolve(
+        './node_modules/@uprtcl/micro-orchestrator'
+      ),
       'graphql-tag': path.resolve('./node_modules/graphql-tag'),
       'holochain-profiles': path.resolve('./node_modules/holochain-profiles'),
       'lit-element': path.resolve('./node_modules/lit-element'),
@@ -121,6 +126,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html',
+    }),
+    new webpack.EnvironmentPlugin({
+      WS_INTERFACE: process.env.WS_INTERFACE,
     }),
   ],
 };

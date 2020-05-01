@@ -17,7 +17,9 @@ import { CMHome } from './elements/hccm-home';
 import { CMBalance } from './elements/hccm-balance';
 
 (async function () {
-  const connection = new HolochainConnection({ host: 'ws://localhost:8888' });
+  const connection = new HolochainConnection({
+    host: process.env.WS_INTERFACE,
+  });
 
   const orchestrator = new MicroOrchestrator();
 
