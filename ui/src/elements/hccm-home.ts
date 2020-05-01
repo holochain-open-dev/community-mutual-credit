@@ -12,8 +12,12 @@ export class CMHome extends moduleConnect(LitElement) {
   @property({ type: Number })
   selectedTabIndex: number = 2;
 
-  @property({ type: Boolean })
+  @property({ type: Number })
+  minVouches: number = undefined;
+  @property({ type: Number })
   numVouches: number = 0;
+  @property({ type: Boolean })
+  initialMember: boolean = false;
 
   static get styles() {
     return sharedStyles;
@@ -31,12 +35,16 @@ export class CMHome extends moduleConnect(LitElement) {
             id
             username
             numVouches
+            isInitialMember
           }
+          minVouches
         }
       `,
     });
 
     this.numVouches = result.data.me.numVouches;
+    this.initialMember = result.data.me.isInitialMember;
+    this.minVouches = result.data.minVouches;
   }
 
   renderPlaceholder() {
@@ -46,11 +54,15 @@ export class CMHome extends moduleConnect(LitElement) {
   }
 
   renderContent() {
+    if (this.minVouches === undefined)
+      return html`<mwc-circular-progress></mwc-circular-progress>`;
+
     if (this.selectedTabIndex === 2) {
       return html`<hcst-agent-list></hcst-agent-list>`;
     }
 
-    if (this.numVouches === 0) return this.renderPlaceholder();
+    if (this.numVouches === 0 && !this.initialMember)
+      return this.renderPlaceholder();
 
     if (this.selectedTabIndex === 0) {
       return html` <hcmc-transaction-list></hcmc-transaction-list>`;

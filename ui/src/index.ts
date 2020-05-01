@@ -14,6 +14,7 @@ import { ProfilesModule } from 'holochain-profiles';
 import { CMApp } from './elements/hccm-app';
 import { CMLogin } from './elements/hccm-login';
 import { CMHome } from './elements/hccm-home';
+import { CMBalance } from './elements/hccm-balance';
 
 (async function () {
   const connection = new HolochainConnection({ host: 'ws://localhost:8888' });
@@ -32,4 +33,5 @@ import { CMHome } from './elements/hccm-home';
   customElements.define('hccm-app', CMApp);
   customElements.define('hccm-login', CMLogin);
   customElements.define('hccm-home', CMHome);
+  customElements.define('hccm-balance', CMBalance);
 })();
