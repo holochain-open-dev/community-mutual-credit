@@ -9,8 +9,7 @@
     "dev": "concurrently \"npm run hc:start\" \"npm start\"",
     "hc:start": "concurrently \"sim2h_server\" \"npm run hc:alice\" \"npm run hc:bob\"",
     "hc:alice": "cd ../dnas && holochain -c alice-conductor-config.toml",
-    "hc:bob": "cd ../dnas && holochain -c bob-conductor-config.toml",
-    "postinstall": "cd node_modules && ln -s ../../dnas/community-currency/zomes/social-triangulation/ui/ holochain-social-triangulation && ln -s ../../dnas/community-currency/zomes/transactor/ui/ holochain-mutual-credit && ln -s ../../dnas/lobby/zomes/profiles/ui/ holochain-profiles"
+    "hc:bob": "cd ../dnas && holochain -c bob-conductor-config.toml"
   },
   "dependencies": {
     "@authentic/mwc-card": "^0.9.0",
@@ -31,9 +30,9 @@
     "@material/mwc-textarea": "^0.14.1",
     "@material/mwc-textfield": "^0.14.1",
     "@material/mwc-top-app-bar-fixed": "^0.14.1",
-    "@uprtcl/graphql": "0.0.7-alpha.2",
-    "@uprtcl/holochain-provider": "0.0.7-alpha.2",
-    "@uprtcl/micro-orchestrator": "0.0.7-alpha.2",
+    "@uprtcl/graphql": "0.0.7-alpha.6",
+    "@uprtcl/holochain-provider": "0.0.7-alpha.6",
+    "@uprtcl/micro-orchestrator": "0.0.7-alpha.6",
     "@vaadin/router": "^1.7.2",
     "lit-element": "^2.2.3",
     "navigo": "^7.1.2"

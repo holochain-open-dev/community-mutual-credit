@@ -15,5 +15,5 @@
     "esModuleInterop": true
   },
   "include": ["src"],
-  "exclude": ["node_modules/!(@open-wc)"]
+  "exclude": ["node_modules"]
 }

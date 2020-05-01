@@ -14,4 +14,6 @@ export function setupRouter(outlet: HTMLElement) {
       component: 'hccm-home',
     },
   ]);
+
+  return router;
 }
