@@ -9,7 +9,8 @@
     "dev": "concurrently \"npm run hc:start\" \"npm start\"",
     "hc:start": "concurrently \"sim2h_server\" \"npm run hc:alice\" \"npm run hc:bob\"",
     "hc:alice": "cd ../dnas && holochain -c alice-conductor-config.toml",
-    "hc:bob": "cd ../dnas && holochain -c bob-conductor-config.toml"
+    "hc:bob": "cd ../dnas && holochain -c bob-conductor-config.toml",
+    "postinstall": "ln -s ../dnas/community-currency/zomes/social-triangulation/ui/ node_modules/holochain-social-triangulation && ln -s ../dnas/community-currency/zomes/transactor/ui/ node_modules/holochain-mutual-credit && ln -s ../dnas/lobby/zomes/profiles/ui/ node_modules/holochain-profiles"
   },
   "dependencies": {
     "@authentic/mwc-card": "^0.9.0",
