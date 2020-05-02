@@ -1,4 +1,4 @@
-import { LitElement, html, property } from 'lit-element';
+import { LitElement, html, property, css } from 'lit-element';
 
 import '@material/mwc-tab';
 import '@material/mwc-tab-bar';
@@ -20,7 +20,14 @@ export class CMHome extends moduleConnect(LitElement) {
   initialMember: boolean = false;
 
   static get styles() {
-    return sharedStyles;
+    return [
+      sharedStyles,
+      css`
+        mwc-top-app-bar-fixed mwc-button {
+          --mdc-theme-primary: white;
+        }
+      `,
+    ];
   }
 
   async firstUpdated() {
@@ -47,6 +54,14 @@ export class CMHome extends moduleConnect(LitElement) {
     this.minVouches = result.data.minVouches;
   }
 
+  isAllowed() {
+    return (
+      this.minVouches !== undefined &&
+      this.numVouches === 0 &&
+      !this.initialMember
+    );
+  }
+
   renderPlaceholder() {
     return html` <span>
       You only have ${this.numVouches}, but you need N to enter the network
@@ -58,16 +73,15 @@ export class CMHome extends moduleConnect(LitElement) {
       return html`<mwc-circular-progress></mwc-circular-progress>`;
 
     if (this.selectedTabIndex === 2) {
-      return html`<hcst-agent-list></hcst-agent-list>`;
+      return html`<hccm-agent-list></hccm-agent-list>`;
     }
 
-    if (this.numVouches === 0 && !this.initialMember)
-      return this.renderPlaceholder();
+    if (this.isAllowed()) return this.renderPlaceholder();
 
     if (this.selectedTabIndex === 0) {
-      return html` <hcmc-transaction-list></hcmc-transaction-list>`;
+      return html` <hccm-balance></hccm-balance>`;
     } else {
-      return html`<hcmc-offer-list></hcmc-offer-list>`;
+      return html`<hcmc-pending-offer-list></hcmc-pending-offer-list>`;
     }
   }
 
@@ -76,8 +90,6 @@ export class CMHome extends moduleConnect(LitElement) {
       <div class="column">
         <mwc-top-app-bar-fixed>
           <span slot="title">Holochain community currency</span>
-
-          <mwc-button label="Create offer"></mwc-button>
         </mwc-top-app-bar-fixed>
 
         <mwc-tab-bar
