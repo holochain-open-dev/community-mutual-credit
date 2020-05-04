@@ -1,14 +1,18 @@
-import { LitElement, html, property, css } from 'lit-element';
+import { LitElement, html, property, css, query } from 'lit-element';
 
 import '@material/mwc-tab';
 import '@material/mwc-tab-bar';
 import '@material/mwc-top-app-bar-fixed';
+import { Dialog } from '@material/mwc-dialog';
 import { sharedStyles } from './sharedStyles';
 import { moduleConnect } from '@uprtcl/micro-orchestrator';
 import { ApolloClientModule } from '@uprtcl/graphql';
 import { ApolloClient, gql } from 'apollo-boost';
 
 export class CMHome extends moduleConnect(LitElement) {
+  @query('#help')
+  help: Dialog;
+
   @property({ type: Number })
   selectedTabIndex: number = 2;
 
@@ -67,10 +71,12 @@ export class CMHome extends moduleConnect(LitElement) {
   }
 
   renderPlaceholder() {
-    return html` <span>
-      You only have ${this.vouchesCount} vouches, but you need
-      ${this.minVouches} to enter the network
-    </span>`;
+    return html`<div class="fill row center-content">
+      <span>
+        You only have ${this.vouchesCount} vouches, but you need
+        ${this.minVouches} to enter the network
+      </span>
+    </div>`;
   }
 
   renderContent() {
@@ -89,8 +95,8 @@ export class CMHome extends moduleConnect(LitElement) {
 
     if (this.selectedTabIndex === 2) {
       return html` <mwc-card style="width: 100%;">
-        <hcmc-allowed-creditor-list></hcmc-allowed-creditor-list
-      ></mwc-card>`;
+        <hcmc-allowed-creditor-list></hcmc-allowed-creditor-list>
+      </mwc-card>`;
     }
 
     if (this.selectedTabIndex === 0) {
@@ -100,11 +106,30 @@ export class CMHome extends moduleConnect(LitElement) {
     }
   }
 
+  renderHelp() {
+    return html`
+      <mwc-dialog id="help">
+          <span>
+            Welcome to the Holochain Community Currency Experiment!<br><br>
+            To join the network of creditors, you need to <strong>receive ${this.minVouches} vouches from
+            members who are already in the network.</strong><br><br>
+            When you have received the vouches, go to the "Creditors" tab and make and offer!
+          </span>
+      </mwc-dialog>
+    `;
+  }
+
   render() {
     return html`
+      ${this.renderHelp()}
       <div class="column shell-container">
         <mwc-top-app-bar-fixed>
           <span slot="title">Holochain community currency</span>
+
+          <mwc-icon-button
+            icon="help"
+            @click=${() => (this.help.open = true)}
+          ></mwc-icon-button>
         </mwc-top-app-bar-fixed>
 
         <mwc-tab-bar
