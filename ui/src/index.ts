@@ -15,7 +15,7 @@ import { CMApp } from './elements/hccm-app';
 import { CMLogin } from './elements/hccm-login';
 import { CMHome } from './elements/hccm-home';
 import { CMBalance } from './elements/hccm-balance';
-import { CMAgentList } from './elements/hccm-agent-list';
+import { getAllowedCreditors } from './get-allowed-creditors';
 
 (async function () {
   const connection = new HolochainConnection({
@@ -29,7 +29,7 @@ import { CMAgentList } from './elements/hccm-agent-list';
     new i18nextBaseModule(),
     new ApolloClientModule(),
     new SocialTriangulationModule('mutual-credit-instance'),
-    new MutualCreditModule('mutual-credit-instance'),
+    new MutualCreditModule('mutual-credit-instance', getAllowedCreditors as any),
     new ProfilesModule('lobby-instance'),
   ]);
 
@@ -37,5 +37,4 @@ import { CMAgentList } from './elements/hccm-agent-list';
   customElements.define('hccm-login', CMLogin);
   customElements.define('hccm-home', CMHome);
   customElements.define('hccm-balance', CMBalance);
-  customElements.define('hccm-agent-list', CMAgentList);
 })();

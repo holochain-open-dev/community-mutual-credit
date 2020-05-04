@@ -41,7 +41,7 @@ export class CMHome extends moduleConnect(LitElement) {
           me {
             id
             username
-            numVouches
+            vouchesCount
             isInitialMember
           }
           minVouches
@@ -72,11 +72,15 @@ export class CMHome extends moduleConnect(LitElement) {
     if (this.minVouches === undefined)
       return html`<mwc-circular-progress></mwc-circular-progress>`;
 
-    if (this.selectedTabIndex === 2) {
-      return html`<hccm-agent-list></hccm-agent-list>`;
+    if (this.selectedTabIndex === 3) {
+      return html`<hcst-agent-list></hcst-agent-list>`;
     }
 
     if (this.isAllowed()) return this.renderPlaceholder();
+
+    if (this.selectedTabIndex === 2) {
+      return html`<hcmc-agent-list></hcmc-agent-list>`;
+    }
 
     if (this.selectedTabIndex === 0) {
       return html` <hccm-balance></hccm-balance>`;
@@ -96,9 +100,10 @@ export class CMHome extends moduleConnect(LitElement) {
           @MDCTabBar:activated=${(e) =>
             (this.selectedTabIndex = e.detail.index)}
         >
-          <mwc-tab label="Home"> </mwc-tab>
+          <mwc-tab label="Balance"> </mwc-tab>
           <mwc-tab label="Offers"></mwc-tab>
           <mwc-tab label="Members"> </mwc-tab>
+          <mwc-tab label="Vouching"> </mwc-tab>
         </mwc-tab-bar>
 
         <div class="content">

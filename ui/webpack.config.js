@@ -10,7 +10,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist-pages'),
   },
   resolve: {
+    symlinks: true,
     alias: {
+      'apollo-boost': path.resolve('./node_modules/apollo-boost'),
+      'apollo-client': path.resolve('./node_modules/apollo-client'),
       '@uprtcl/graphql': path.resolve('./node_modules/@uprtcl/graphql'),
       '@uprtcl/holochain-provider': path.resolve(
         './node_modules/@uprtcl/holochain-provider'
