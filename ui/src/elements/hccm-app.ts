@@ -18,6 +18,11 @@ export class CMApp extends moduleConnect(LitElement) {
           flex: 1;
           display: flex;
         }
+
+        .shell-container > hccm-login {
+          justify-content: center;
+          align-items: center;
+        }
       `,
     ];
   }
