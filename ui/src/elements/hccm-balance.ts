@@ -1,5 +1,5 @@
 import { moduleConnect } from '@uprtcl/micro-orchestrator';
-import { LitElement, html, property } from 'lit-element';
+import { LitElement, html, property, css } from 'lit-element';
 import { ApolloClient, gql } from 'apollo-boost';
 import { ApolloClientModule } from '@uprtcl/graphql';
 import { sharedStyles } from './sharedStyles';
@@ -9,7 +9,14 @@ export class CMBalance extends moduleConnect(LitElement) {
   balance: number;
 
   static get styles() {
-    return sharedStyles;
+    return [
+      sharedStyles,
+      css`
+        .balance {
+          font-size: 60px;
+        }
+      `,
+    ];
   }
 
   async firstUpdated() {
@@ -32,10 +39,19 @@ export class CMBalance extends moduleConnect(LitElement) {
     if (this.balance === undefined)
       return html`<mwc-circular-progress></mwc-circular-progress>`;
 
-    return html` 
-    <div class="row">
-      <span>${this.balance}</span>
-      <hcmc-transaction-list></hcmc-transaction-list>
+    return html` <div class="row fill">
+      <div style="flex-basis: 500px;" class="column center-content">
+        <div class="column">
+          <span class="title" style="margin-bottom: 8px;">Balance</span>
+          <span class="balance">${this.balance} credits</span>
+        </div>
+      </div>
+      <div class="column fill">
+        <span class="title">Transaction history</span>
+        <mwc-card style="margin-top: 16px;">
+          <hcmc-transaction-list></hcmc-transaction-list>
+        </mwc-card>
+      </div>
     </div>`;
   }
 }

@@ -32,4 +32,9 @@ export const sharedStyles = css`
   mwc-card {
     width: auto;
   }
+
+  .title {
+    font-weight: bold;
+    font-size: 18px;
+  }
 `;

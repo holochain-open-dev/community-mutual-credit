@@ -26,6 +26,11 @@ export class CMHome extends moduleConnect(LitElement) {
         mwc-top-app-bar-fixed mwc-button {
           --mdc-theme-primary: white;
         }
+
+        .content > hccm-balance {
+          display: flex;
+          flex: 1;
+        }
       `,
     ];
   }
