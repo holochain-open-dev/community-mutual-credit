@@ -63,22 +63,29 @@ export class CMHome extends moduleConnect(LitElement) {
 
   renderPlaceholder() {
     return html` <span>
-      You only have ${this.vouchesCount}, but you need N to enter the network
+      You only have ${this.vouchesCount} vouches, but you need
+      ${this.minVouches} to enter the network
     </span>`;
   }
 
   renderContent() {
     if (this.minVouches === undefined)
-      return html`<mwc-circular-progress></mwc-circular-progress>`;
+      return html`<div class="fill row center-content">
+        <mwc-circular-progress></mwc-circular-progress>
+      </div>`;
 
     if (this.selectedTabIndex === 3) {
-      return html`<hcst-agent-list></hcst-agent-list>`;
+      return html`<mwc-card style="width: 100%;"
+        ><hcst-agent-list></hcst-agent-list
+      ></mwc-card>`;
     }
 
     if (!this.isAllowed()) return this.renderPlaceholder();
 
     if (this.selectedTabIndex === 2) {
-      return html`<hcmc-agent-list></hcmc-agent-list>`;
+      return html` <mwc-card style="width: 100%;">
+        <hcmc-allowed-creditor-list></hcmc-allowed-creditor-list
+      ></mwc-card>`;
     }
 
     if (this.selectedTabIndex === 0) {
@@ -90,7 +97,7 @@ export class CMHome extends moduleConnect(LitElement) {
 
   render() {
     return html`
-      <div class="column">
+      <div class="column shell-container">
         <mwc-top-app-bar-fixed>
           <span slot="title">Holochain community currency</span>
         </mwc-top-app-bar-fixed>
@@ -101,11 +108,11 @@ export class CMHome extends moduleConnect(LitElement) {
         >
           <mwc-tab label="Balance"> </mwc-tab>
           <mwc-tab label="Offers"></mwc-tab>
-          <mwc-tab label="Members"> </mwc-tab>
-          <mwc-tab label="Vouching"> </mwc-tab>
+          <mwc-tab label="Creditors"> </mwc-tab>
+          <mwc-tab label="Membrane"> </mwc-tab>
         </mwc-tab-bar>
 
-        <div class="content">
+        <div class="content column padding" style="flex: 1;">
           ${this.renderContent()}
         </div>
       </div>

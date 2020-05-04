@@ -19,13 +19,21 @@
         font-family: 'Roboto', sans-serif;
         background-color: #ededed;
       }
+      body {
+        display: flex;
+      }
+
+      .shell-container {
+        display: flex;
+        flex: 1;
+      }
     </style>
     <title>Holochain Mutual-credit</title>
   </head>
 
   <body>
-    <module-container>
-      <hccm-app></hccm-app>
+    <module-container class="shell-container">
+      <hccm-app class="shell-container"></hccm-app>
     </module-container>
 
     <script type="module" src="./src/index.ts"></script>

@@ -10,4 +10,26 @@ export const sharedStyles = css`
     display: flex;
     flex-direction: column;
   }
+
+  .center-content {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .padding {
+    padding: 16px;
+  }
+
+  .shell-container {
+    display: flex;
+    flex: 1;
+  }
+
+  .fill {
+    flex: 1;
+  }
+
+  mwc-card {
+    width: auto;
+  }
 `;

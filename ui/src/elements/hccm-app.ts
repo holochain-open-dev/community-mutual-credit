@@ -1,5 +1,5 @@
 import { moduleConnect } from '@uprtcl/micro-orchestrator';
-import { LitElement, html, property, query } from 'lit-element';
+import { LitElement, html, property, query, css } from 'lit-element';
 import { sharedStyles } from './sharedStyles';
 import { setupRouter } from '../router';
 import { ApolloClientModule } from '@uprtcl/graphql';
@@ -11,7 +11,15 @@ export class CMApp extends moduleConnect(LitElement) {
   outlet: HTMLElement;
 
   static get styles() {
-    return sharedStyles;
+    return [
+      sharedStyles,
+      css`
+        .shell-container > * {
+          flex: 1;
+          display: flex;
+        }
+      `,
+    ];
   }
 
   async firstUpdated() {
@@ -45,6 +53,6 @@ export class CMApp extends moduleConnect(LitElement) {
   }
 
   render() {
-    return html` <div id="outlet"></div> `;
+    return html` <div id="outlet" class="shell-container"></div> `;
   }
 }
