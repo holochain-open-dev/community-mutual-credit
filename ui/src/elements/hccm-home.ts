@@ -15,7 +15,7 @@ export class CMHome extends moduleConnect(LitElement) {
   @property({ type: Number })
   minVouches: number = undefined;
   @property({ type: Number })
-  numVouches: number = 0;
+  vouchesCount: number = 0;
   @property({ type: Boolean })
   initialMember: boolean = false;
 
@@ -49,7 +49,7 @@ export class CMHome extends moduleConnect(LitElement) {
       `,
     });
 
-    this.numVouches = result.data.me.numVouches;
+    this.vouchesCount = result.data.me.vouchesCount;
     this.initialMember = result.data.me.isInitialMember;
     this.minVouches = result.data.minVouches;
   }
@@ -57,14 +57,13 @@ export class CMHome extends moduleConnect(LitElement) {
   isAllowed() {
     return (
       this.minVouches !== undefined &&
-      this.numVouches === 0 &&
-      !this.initialMember
+      (this.vouchesCount >= this.minVouches || this.initialMember)
     );
   }
 
   renderPlaceholder() {
     return html` <span>
-      You only have ${this.numVouches}, but you need N to enter the network
+      You only have ${this.vouchesCount}, but you need N to enter the network
     </span>`;
   }
 
@@ -76,7 +75,7 @@ export class CMHome extends moduleConnect(LitElement) {
       return html`<hcst-agent-list></hcst-agent-list>`;
     }
 
-    if (this.isAllowed()) return this.renderPlaceholder();
+    if (!this.isAllowed()) return this.renderPlaceholder();
 
     if (this.selectedTabIndex === 2) {
       return html`<hcmc-agent-list></hcmc-agent-list>`;
@@ -85,7 +84,7 @@ export class CMHome extends moduleConnect(LitElement) {
     if (this.selectedTabIndex === 0) {
       return html` <hccm-balance></hccm-balance>`;
     } else {
-      return html`<hcmc-pending-offer-list></hcmc-pending-offer-list>`;
+      return html`<hccm-offers></hccm-offers>`;
     }
   }
 

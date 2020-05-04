@@ -32,7 +32,8 @@ export class CMBalance extends moduleConnect(LitElement) {
     if (this.balance === undefined)
       return html`<mwc-circular-progress></mwc-circular-progress>`;
 
-    return html` <div class="column">
+    return html` 
+    <div class="row">
       <span>${this.balance}</span>
       <hcmc-transaction-list></hcmc-transaction-list>
     </div>`;

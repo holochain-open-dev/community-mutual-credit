@@ -16,6 +16,7 @@ import { CMLogin } from './elements/hccm-login';
 import { CMHome } from './elements/hccm-home';
 import { CMBalance } from './elements/hccm-balance';
 import { getAllowedCreditors } from './get-allowed-creditors';
+import { CMOffers } from './elements/hccm-offers';
 
 (async function () {
   const connection = new HolochainConnection({
@@ -29,7 +30,10 @@ import { getAllowedCreditors } from './get-allowed-creditors';
     new i18nextBaseModule(),
     new ApolloClientModule(),
     new SocialTriangulationModule('mutual-credit-instance'),
-    new MutualCreditModule('mutual-credit-instance', getAllowedCreditors as any),
+    new MutualCreditModule(
+      'mutual-credit-instance',
+      getAllowedCreditors as any
+    ),
     new ProfilesModule('lobby-instance'),
   ]);
 
@@ -37,4 +41,5 @@ import { getAllowedCreditors } from './get-allowed-creditors';
   customElements.define('hccm-login', CMLogin);
   customElements.define('hccm-home', CMHome);
   customElements.define('hccm-balance', CMBalance);
+  customElements.define('hccm-offers', CMOffers);
 })();
