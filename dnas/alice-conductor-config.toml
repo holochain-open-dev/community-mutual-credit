@@ -16,7 +16,7 @@ id = 'lobby-dna'
 
 [[dnas]]
 file = './community-currency/dist/community-currency.dna.json'
-hash = 'QmUkSvy75Nw5R8MdDFpCdUwT5QsE1FaQ1zh1GnLVScWtUX'
+hash = 'QmNTHp2qxALUkhwoNqrmq1smC7fHupMfK5yL6DzRiTFP7j'
 id = 'mutual-credit-dna'
 
 [[instances]]

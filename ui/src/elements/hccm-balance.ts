@@ -43,7 +43,9 @@ export class CMBalance extends moduleConnect(LitElement) {
       <div style="flex-basis: 500px;" class="column center-content">
         <div class="column">
           <span class="title" style="margin-bottom: 8px;">Balance</span>
-          <span class="balance">${this.balance} credits</span>
+          <span class="balance"
+            >${`${this.balance > 0 ? '+' : ''}${this.balance}`} credits</span
+          >
         </div>
       </div>
       <div class="column fill">
