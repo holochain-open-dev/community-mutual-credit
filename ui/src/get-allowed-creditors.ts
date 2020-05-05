@@ -18,6 +18,8 @@ export const getAllowedCreditors = async (
         minVouches
       }
     `,
+
+    fetchPolicy: 'network-only',
   });
 
   const allAgents: VouchedAgent[] = result.data.allAgents;

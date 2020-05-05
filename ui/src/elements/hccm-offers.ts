@@ -14,7 +14,7 @@ export class CMOffers extends moduleConnect(LitElement) {
 
   render() {
     return html`
-      <div class="row">
+      <div class="row fill" style="min-height: 400px;">
         <hcmc-pending-offer-list
           style="flex-basis: 40%;"
           @offer-selected=${(e) =>
@@ -22,15 +22,15 @@ export class CMOffers extends moduleConnect(LitElement) {
         ></hcmc-pending-offer-list>
         ${this.selectedTransactionId
           ? html`
-              <mwc-card style="width: auto; flex: 1; margin: 16px;">
-                <div class="padding">
-                  <hcmc-offer-detail
-                    .transactionId=${this.selectedTransactionId}
-                  ></hcmc-offer-detail>
-                </div>
-              </mwc-card>
+              <hcmc-offer-detail
+                class="column fill padding"
+                @offer-canceled=${() => (this.selectedTransactionId = null)}
+                .transactionId=${this.selectedTransactionId}
+              ></hcmc-offer-detail>
             `
-          : html``}
+          : html`<div class="fill center-content column">
+              <span>Select an offer to see its details</span>
+            </div>`}
       </div>
     `;
   }

@@ -30,6 +30,7 @@ export class CMBalance extends moduleConnect(LitElement) {
           myBalance
         }
       `,
+      fetchPolicy: 'network-only',
     });
 
     this.balance = result.data.myBalance;
@@ -39,20 +40,20 @@ export class CMBalance extends moduleConnect(LitElement) {
     if (this.balance === undefined)
       return html`<mwc-circular-progress></mwc-circular-progress>`;
 
-    return html` <div class="row fill">
+    return html` <div class="row fill padding">
       <div style="flex-basis: 500px;" class="column center-content">
         <div class="column">
-          <span class="title" style="margin-bottom: 8px;">Balance</span>
+          <span class="title" style="margin-bottom: 8px;">Your balance</span>
           <span class="balance"
-            >${`${this.balance > 0 ? '+' : ''}${this.balance}`} credits</span
+            >${`${this.balance > 0 ? '+' : ''}${this.balance.toFixed(1)}`} credits</span
           >
         </div>
       </div>
       <div class="column fill">
-        <span class="title">Transaction history</span>
-        <mwc-card style="margin-top: 16px;">
-          <hcmc-transaction-list></hcmc-transaction-list>
-        </mwc-card>
+        <span class="title" style="margin-bottom: 20px;"
+          >Transaction history</span
+        >
+        <hcmc-transaction-list></hcmc-transaction-list>
       </div>
     </div>`;
   }

@@ -7,6 +7,15 @@ export class CMLogin extends LitElement {
     return sharedStyles;
   }
 
+/*   renderPlaceholder() {
+    return html`<div class="fill row center-content">
+      <span>
+        You only have ${this.vouchesCount} vouches, but you need
+        ${this.minVouches} to enter the network
+      </span>
+    </div>`;
+  }
+ */  
   render() {
     return html`
       <div class="column center-content">
