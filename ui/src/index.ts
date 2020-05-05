@@ -17,6 +17,7 @@ import { CMHome } from './elements/hccm-home';
 import { CMBalance } from './elements/hccm-balance';
 import { getAllowedCreditors } from './get-allowed-creditors';
 import { CMOffers } from './elements/hccm-offers';
+import { CMDisallowed } from './elements/hccm-disallowed';
 
 (async function () {
   const connection = new HolochainConnection({
@@ -42,4 +43,5 @@ import { CMOffers } from './elements/hccm-offers';
   customElements.define('hccm-home', CMHome);
   customElements.define('hccm-balance', CMBalance);
   customElements.define('hccm-offers', CMOffers);
+  customElements.define('hccm-disallowed', CMDisallowed);
 })();

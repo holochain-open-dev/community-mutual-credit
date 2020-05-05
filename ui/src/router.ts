@@ -13,6 +13,10 @@ export function setupRouter(outlet: HTMLElement) {
       path: '/home',
       component: 'hccm-home',
     },
+    {
+      path: '/disallowed',
+      component: 'hccm-disallowed',
+    },
   ]);
 
   return router;

@@ -40,20 +40,26 @@ export class CMApp extends moduleConnect(LitElement) {
           me {
             id
             username
+            vouchesCount
+            isInitialMember
           }
+          minVouches
         }
       `,
     });
 
     const isLogin = router.location.getUrl().includes('login');
     const hasUsername = result.data.me.username != undefined;
-
-    if (isLogin && hasUsername) {
-      Router.go('/home');
-    }
+    const isAllowed =
+      result.data.me.isInitialMember ||
+      result.data.me.vouchesCount >= result.data.minVouches;
 
     if (!isLogin && !hasUsername) {
       Router.go('/login');
+    } else if (hasUsername && !isAllowed) {
+      Router.go('/disallowed');
+    } else if (hasUsername) {
+      Router.go('/home');
     }
   }
 
