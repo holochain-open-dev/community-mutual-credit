@@ -63,24 +63,32 @@ export class CMHome extends moduleConnect(LitElement) {
     const connection: HolochainConnection = this.request(
       HolochainConnectionModule.bindings.HolochainConnection
     );
-    connection.onsignal(console.log);
     connection.onSignal('offer-received', ({ transaction_address }) => {
       this.snackMessage = `New offer received!`;
-      this.snackCallback = () => (this.selectedTabIndex = 1);
+      this.snackCallback = () => {
+        this.selectedTabIndex = 0;
+        setTimeout(() => (this.selectedTabIndex = 1));
+      };
 
       this.snackbar.show();
     });
 
     connection.onSignal('offer-canceled', ({ transaction_address }) => {
       this.snackMessage = `Offer was canceled`;
-      this.snackCallback = () => (this.selectedTabIndex = 1);
+      this.snackCallback = () => {
+        this.selectedTabIndex = 0;
+        setTimeout(() => (this.selectedTabIndex = 1));
+      };
 
       this.snackbar.show();
     });
 
     connection.onSignal('offer-completed', ({ transaction_address }) => {
       this.snackMessage = `Òffer accepted and transaction completed`;
-      this.snackCallback = () => (this.selectedTabIndex = 0);
+      this.snackCallback = () => {
+        this.selectedTabIndex = 1;
+        setTimeout(() => (this.selectedTabIndex = 0));
+      };
 
       this.snackbar.show();
     });
