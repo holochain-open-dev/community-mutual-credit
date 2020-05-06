@@ -8,10 +8,23 @@ import { sharedStyles } from './sharedStyles';
 import { moduleConnect } from '@uprtcl/micro-orchestrator';
 import { ApolloClientModule } from '@uprtcl/graphql';
 import { ApolloClient, gql } from 'apollo-boost';
+import {
+  HolochainConnection,
+  HolochainConnectionModule,
+} from '@uprtcl/holochain-provider';
+import { Snackbar } from '@material/mwc-snackbar';
 
 export class CMHome extends moduleConnect(LitElement) {
   @query('#help')
   help: Dialog;
+
+  @query('#snackbar')
+  snackbar: Snackbar;
+
+  @property({ type: String })
+  snackMessage: string;
+  @property()
+  snackCallback: () => any;
 
   @property({ type: Number })
   selectedTabIndex: number = 2;
@@ -47,6 +60,31 @@ export class CMHome extends moduleConnect(LitElement) {
   }
 
   async firstUpdated() {
+    const connection: HolochainConnection = this.request(
+      HolochainConnectionModule.bindings.HolochainConnection
+    );
+    connection.onsignal(console.log);
+    connection.onSignal('offer-received', ({ transaction_address }) => {
+      this.snackMessage = `New offer received!`;
+      this.snackCallback = () => (this.selectedTabIndex = 1);
+
+      this.snackbar.show();
+    });
+
+    connection.onSignal('offer-canceled', ({ transaction_address }) => {
+      this.snackMessage = `Offer was canceled`;
+      this.snackCallback = () => (this.selectedTabIndex = 1);
+
+      this.snackbar.show();
+    });
+
+    connection.onSignal('offer-completed', ({ transaction_address }) => {
+      this.snackMessage = `Òffer accepted and transaction completed`;
+      this.snackCallback = () => (this.selectedTabIndex = 0);
+
+      this.snackbar.show();
+    });
+
     const client: ApolloClient<any> = await this.request(
       ApolloClientModule.bindings.Client
     );
@@ -114,9 +152,18 @@ export class CMHome extends moduleConnect(LitElement) {
     `;
   }
 
+  renderSnackbar() {
+    return html`<mwc-snackbar id="snackbar" .labelText=${this.snackMessage}>
+      <mwc-button slot="action" @click=${() => this.snackCallback()}
+        >SEE</mwc-button
+      >
+      <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
+    </mwc-snackbar> `;
+  }
+
   render() {
     return html`
-      ${this.renderHelp()}
+      ${this.renderSnackbar()} ${this.renderHelp()}
       <div class="column shell-container">
         <mwc-top-app-bar-fixed>
           <span slot="title">Holochain community currency</span>
