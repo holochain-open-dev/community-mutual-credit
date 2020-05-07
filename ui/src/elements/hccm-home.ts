@@ -84,7 +84,7 @@ export class CMHome extends moduleConnect(LitElement) {
     });
 
     connection.onSignal('offer-completed', ({ transaction_address }) => {
-      this.snackMessage = `Òffer accepted and transaction completed`;
+      this.snackMessage = `Offer accepted and transaction completed`;
       this.snackCallback = () => {
         this.selectedTabIndex = 1;
         setTimeout(() => (this.selectedTabIndex = 0));

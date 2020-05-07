@@ -16,3 +16,4 @@ git submodule update
 6. Start the holochain conductors and sim2h_server: `npm run hc:start`.
 7. Open another terminal and go to the ui folder as well.
 8. Run `npm start`.
+9. If you want another agent, open another terminal and from the ui folder run `npm run start:bob`.
