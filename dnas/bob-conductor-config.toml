@@ -11,7 +11,7 @@ keystore_file = './bob.key'
 
 [[dnas]]
 file = './lobby/dist/lobby.dna.json'
-hash = 'QmSagrCgkco3Y4dSoPECBXK7SUAhuboWufuwAxHukPWYDa'
+hash = 'QmQRd4DgPyTGbFN6wp1mYdpZwSZKy2ksTe9vZfRvSqvt3a'
 id = 'lobby-dna'
 
 [[dnas]]
@@ -27,23 +27,12 @@ id = 'lobby-instance'
 [instances.storage]
 type = 'memory'
 
-[[instances]]
-agent = 'bob-agent'
-dna = 'mutual-credit-dna'
-id = 'mutual-credit-instance'
-
-[instances.storage]
-type = 'memory'
-
 [[interfaces]]
 admin = true
 id = 'websocket-interface'
 
 [[interfaces.instances]]
 id = 'lobby-instance'
-
-[[interfaces.instances]]
-id = 'mutual-credit-instance'
 
 [interfaces.driver]
 port = 8889

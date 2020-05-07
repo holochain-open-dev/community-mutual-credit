@@ -30,7 +30,7 @@ import { CMDisallowed } from './elements/hccm-disallowed';
     new HolochainConnectionModule(connection),
     new i18nextBaseModule(),
     new ApolloClientModule(),
-    new SocialTriangulationModule('mutual-credit-instance'),
+    new SocialTriangulationModule('mutual-credit-instance', 'lobby-instance'),
     new MutualCreditModule(
       'mutual-credit-instance',
       getAllowedCreditors as any

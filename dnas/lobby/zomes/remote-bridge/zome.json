@@ -1,4 +1,13 @@
 {
   "name": "remote-bridge",
-  "description": "Generated from the rust-zome-template"
+  "description": "Generated from the rust-zome-template",
+    "bridges": [
+    {
+      "presence": "optional",
+      "handle": "remote-bridge",
+      "reference": {
+        "traits": {}
+      }
+    }
+  ]
 }

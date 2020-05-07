@@ -1,4 +1,3 @@
-bridges = []
 persistence_dir = ''
 ui_bundles = []
 ui_interfaces = []
@@ -11,7 +10,7 @@ keystore_file = './alice.key'
 
 [[dnas]]
 file = './lobby/dist/lobby.dna.json'
-hash = 'QmSagrCgkco3Y4dSoPECBXK7SUAhuboWufuwAxHukPWYDa'
+hash = 'QmQRd4DgPyTGbFN6wp1mYdpZwSZKy2ksTe9vZfRvSqvt3a'
 id = 'lobby-dna'
 
 [[dnas]]
@@ -44,6 +43,11 @@ id = 'lobby-instance'
 
 [[interfaces.instances]]
 id = 'mutual-credit-instance'
+
+[[bridges]]
+caller_id = "lobby-instance"
+callee_id = "mutual-credit-instance"
+handle = "remote-bridge"
 
 [interfaces.driver]
 port = 8888
