@@ -10,7 +10,7 @@ keystore_file = './alice.key'
 
 [[dnas]]
 file = './lobby/dist/lobby.dna.json'
-hash = 'QmQRd4DgPyTGbFN6wp1mYdpZwSZKy2ksTe9vZfRvSqvt3a'
+hash = 'QmVekkJnHgXGY9kVYaP1oDhCtYdnaaUm8APbi378LBRbz8'
 id = 'lobby-dna'
 
 [[dnas]]
