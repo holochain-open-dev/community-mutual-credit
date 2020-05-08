@@ -35,13 +35,13 @@
     "@material/mwc-textfield": "^0.14.1",
     "@material/mwc-top-app-bar-fixed": "^0.14.1",
     "@uprtcl/graphql": "0.0.7-alpha.6",
-    "@uprtcl/holochain-provider": "0.0.7-alpha.8.2",
+    "@uprtcl/holochain-provider": "0.0.7-alpha.8.6",
     "@uprtcl/micro-orchestrator": "0.0.7-alpha.6",
     "@vaadin/router": "^1.7.2",
     "lit-element": "^2.2.3",
-    "holochain-mutual-credit": "^0.0.1",
-    "holochain-profiles": "^0.0.1",
-    "holochain-social-triangulation": "^0.0.1"
+    "holochain-mutual-credit": "^0.0.2",
+    "holochain-profiles": "^0.0.2",
+    "holochain-social-triangulation": "^0.0.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",

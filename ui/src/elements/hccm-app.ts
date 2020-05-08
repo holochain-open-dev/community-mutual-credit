@@ -10,6 +10,9 @@ export class CMApp extends moduleConnect(LitElement) {
   @query('#outlet')
   outlet: HTMLElement;
 
+  @property()
+  loading: boolean = true;
+
   static get styles() {
     return [
       sharedStyles,
@@ -17,6 +20,10 @@ export class CMApp extends moduleConnect(LitElement) {
         .shell-container > * {
           flex: 1;
           display: flex;
+        }
+
+        .hidden {
+          display: none;
         }
 
         .shell-container > hccm-login {
@@ -39,9 +46,13 @@ export class CMApp extends moduleConnect(LitElement) {
         {
           me {
             id
-            username
-            vouchesCount
-            isInitialMember
+            agent {
+              id
+              username
+              vouchesCount
+              isInitialMember
+            }
+            hasJoined
           }
           minVouches
         }
@@ -49,21 +60,31 @@ export class CMApp extends moduleConnect(LitElement) {
     });
 
     const isLogin = router.location.getUrl().includes('login');
-    const hasUsername = result.data.me.username != undefined;
-    const isAllowed =
-      result.data.me.isInitialMember ||
-      result.data.me.vouchesCount >= result.data.minVouches;
+    const hasUsername = result.data.me.agent.username != undefined;
+    const hasJoined = result.data.me.hasJoined;
 
     if (!isLogin && !hasUsername) {
       Router.go('/login');
-    } else if (hasUsername && !isAllowed) {
+    } else if (hasUsername && !hasJoined) {
       Router.go('/disallowed');
     } else if (hasUsername) {
       Router.go('/home');
     }
+
+    this.loading = false;
   }
 
   render() {
-    return html` <div id="outlet" class="shell-container"></div> `;
+    return html`
+      <div
+        id="outlet"
+        class=${'shell-container ' + (this.loading ? 'hidden' : '')}
+      ></div>
+      ${this.loading
+        ? html`<div class="fill column center-content">
+            <mwc-circular-progress></mwc-circular-progress>
+          </div>`
+        : html``}
+    `;
   }
 }

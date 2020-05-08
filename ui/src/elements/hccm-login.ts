@@ -22,19 +22,24 @@ export class CMLogin extends moduleConnect(LitElement) {
         {
           me {
             id
+            hasJoined
           }
         }
       `,
     });
 
-    await this.client.mutate({
-      mutation: JOIN_NETWORK,
-      variables: {
-        agentId: result.data.me.id,
-      },
-    });
+    if (result.data.me.hasJoined) {
+      await this.client.mutate({
+        mutation: JOIN_NETWORK,
+        variables: {
+          agentId: result.data.me.id,
+        },
+      });
 
-    window.location.href = '/home';
+      window.location.href = '/home';
+    } else {
+      window.location.href = '/disallowed';
+    }
   }
 
   render() {

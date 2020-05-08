@@ -27,13 +27,16 @@ export class CMBalance extends moduleConnect(LitElement) {
     const result = await client.query({
       query: gql`
         {
-          myBalance
+          me {
+            id
+            balance
+          }
         }
       `,
       fetchPolicy: 'network-only',
     });
 
-    this.balance = result.data.myBalance;
+    this.balance = result.data.me.balance;
   }
 
   render() {

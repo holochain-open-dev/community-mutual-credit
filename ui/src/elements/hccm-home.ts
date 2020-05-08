@@ -102,17 +102,20 @@ export class CMHome extends moduleConnect(LitElement) {
         {
           me {
             id
-            username
-            vouchesCount
-            isInitialMember
+            agent {
+              id
+              username
+              vouchesCount
+              isInitialMember
+            }
           }
           minVouches
         }
       `,
     });
 
-    this.vouchesCount = result.data.me.vouchesCount;
-    this.initialMember = result.data.me.isInitialMember;
+    this.vouchesCount = result.data.me.agent.vouchesCount;
+    this.initialMember = result.data.me.agent.isInitialMember;
     this.minVouches = result.data.minVouches;
 
     this.addEventListener('offer-accepted', (e) => {
