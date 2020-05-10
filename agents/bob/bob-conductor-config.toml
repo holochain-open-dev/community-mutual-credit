@@ -10,12 +10,12 @@ public_address = 'HcSCjvyaY5Mkzazdcx655IY6X54uMmVRsfK8x4mms8FT8n7gsEGqzpf3I4xc6c
 keystore_file = './bob.key'
 
 [[dnas]]
-file = '../dnas/lobby/dist/lobby.dna.json'
+file = '../../dnas/lobby/dist/lobby.dna.json'
 hash = 'QmbuQ5Ec1ERJGWWTf9VoPSnB2XH4ErEM6Q9PJ3Lwf8akw2'
 id = 'lobby-dna'
 
 [[dnas]]
-file = '../dnas/community-currency/dist/community-currency.dna.json'
+file = '../../dnas/community-currency/dist/community-currency.dna.json'
 hash = 'QmZuH6bdTuxXaCa8M8km42b617QXfjxTEmchVpqwTLVdUV'
 id = 'mutual-credit-dna'
 
