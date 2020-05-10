@@ -267,7 +267,7 @@ export class CMHome extends moduleConnect(LitElement) {
                 ></mwc-icon-button>
 
                 <mwc-drawer style="width: 100vw; --mdc-theme-primary: #536DFE;">
-                  <mwc-list class="drawer-list">
+                  <mwc-list class="drawer-list" style="box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.2);">
                     <mwc-list-item twoline noninteractive>
                       <span>@${this.me.agent.username}</span>
                       <span slot="secondary">${this.me.agent.id}</span>
