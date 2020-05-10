@@ -23,14 +23,14 @@ export class CMOffers extends moduleConnect(LitElement) {
           ></hcmc-pending-offer-list>
         </mwc-card>
 
-        <div style="min-height: 334px; width: 700px;" class="column">
+        <div style="width: 700px; position: sticky; top: 48px;">
           ${this.selectedTransactionId
             ? html`
                 <mwc-card
-                  style="min-height: 334px; position: sticky; top: 48px;"
+                  style="min-height: 334px; position: sticky; width: 100%; top: 48px;"
                 >
                   <hcmc-offer-detail
-                    style="align-self: center;"
+                    style="align-self: center; min-height: 286px;"
                     class="column fill padding"
                     @offer-completed=${() =>
                       (this.selectedTransactionId = null)}
@@ -39,7 +39,7 @@ export class CMOffers extends moduleConnect(LitElement) {
                   ></hcmc-offer-detail>
                 </mwc-card>
               `
-            : html`<div class="fill center-content column">
+            : html`<div class="fill center-content column" style="height: 334px">
                 <span>Select an offer to see its details</span>
               </div>`}
         </div>

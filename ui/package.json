@@ -39,9 +39,9 @@
     "@uprtcl/holochain-provider": "0.0.7-alpha.8.6",
     "@uprtcl/micro-orchestrator": "0.0.7-alpha.6",
     "@vaadin/router": "^1.7.2",
-    "holochain-mutual-credit": "^0.0.3",
-    "holochain-profiles": "^0.0.3",
-    "holochain-social-triangulation": "^0.0.3",
+    "holochain-mutual-credit": "^0.0.4",
+    "holochain-profiles": "^0.0.4",
+    "holochain-social-triangulation": "^0.0.4",
     "lit-element": "^2.3.0",
     "lit-html": "^1.2.1"
   },
