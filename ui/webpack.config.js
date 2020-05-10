@@ -25,6 +25,7 @@ module.exports = {
       'holochain-profiles': path.resolve('./node_modules/holochain-profiles'),
       'lit-element': path.resolve('./node_modules/lit-element'),
       'lit-html': path.resolve('./node_modules/lit-html'),
+      'lit-html/directives/live.js': path.resolve('./node_modules/lit-html/directives/live.js'),
       'wicg-inert': path.resolve('./node_modules/wicg-inert/dist/inert'),
       '@authentic/mwc-circular-progress': path.resolve(
         './node_modules/@authentic/mwc-circular-progress'

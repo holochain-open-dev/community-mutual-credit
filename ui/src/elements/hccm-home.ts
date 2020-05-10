@@ -1,8 +1,11 @@
 import { LitElement, html, property, css, query } from 'lit-element';
 
-import '@material/mwc-tab';
-import '@material/mwc-tab-bar';
+import '@material/mwc-drawer';
 import '@material/mwc-top-app-bar-fixed';
+import '@material/mwc-list';
+import '@material/mwc-list/mwc-list-item';
+import '@material/mwc-icon-button';
+import { Snackbar } from '@material/mwc-snackbar';
 import { Dialog } from '@material/mwc-dialog';
 import { sharedStyles } from './sharedStyles';
 import { moduleConnect } from '@uprtcl/micro-orchestrator';
@@ -12,7 +15,6 @@ import {
   HolochainConnection,
   HolochainConnectionModule,
 } from '@uprtcl/holochain-provider';
-import { Snackbar } from '@material/mwc-snackbar';
 
 export class CMHome extends moduleConnect(LitElement) {
   @query('#help')
@@ -26,8 +28,10 @@ export class CMHome extends moduleConnect(LitElement) {
   @property()
   snackCallback: () => any;
 
+  sections = ['Balance', 'Offers', 'Creditors', 'Membrane'];
+
   @property({ type: Number })
-  selectedTabIndex: number = 2;
+  selectedSectionIndex: number = 2;
 
   @property({ type: Number })
   minVouches: number = undefined;
@@ -64,33 +68,24 @@ export class CMHome extends moduleConnect(LitElement) {
       HolochainConnectionModule.bindings.HolochainConnection
     );
     connection.onSignal('offer-received', ({ transaction_address }) => {
-      this.snackMessage = `New offer received!`;
-      this.snackCallback = () => {
-        this.selectedTabIndex = 0;
-        setTimeout(() => (this.selectedTabIndex = 1));
-      };
-
-      this.snackbar.show();
+      this.showSnackbar(`New offer received!`, () => {
+        this.selectedSectionIndex = 0;
+        setTimeout(() => (this.selectedSectionIndex = 1));
+      });
     });
 
     connection.onSignal('offer-canceled', ({ transaction_address }) => {
-      this.snackMessage = `Offer was canceled`;
-      this.snackCallback = () => {
-        this.selectedTabIndex = 0;
-        setTimeout(() => (this.selectedTabIndex = 1));
-      };
-
-      this.snackbar.show();
+      this.showSnackbar(`Offer was canceled`, () => {
+        this.selectedSectionIndex = 0;
+        setTimeout(() => (this.selectedSectionIndex = 1));
+      });
     });
 
     connection.onSignal('offer-completed', ({ transaction_address }) => {
-      this.snackMessage = `Offer accepted and transaction completed`;
-      this.snackCallback = () => {
-        this.selectedTabIndex = 1;
-        setTimeout(() => (this.selectedTabIndex = 0));
-      };
-
-      this.snackbar.show();
+      this.showSnackbar(`Offer accepted and transaction completed`, () => {
+        this.selectedSectionIndex = 1;
+        setTimeout(() => (this.selectedSectionIndex = 0));
+      });
     });
 
     const client: ApolloClient<any> = await this.request(
@@ -108,6 +103,7 @@ export class CMHome extends moduleConnect(LitElement) {
               vouchesCount
               isInitialMember
             }
+            balance
           }
           minVouches
         }
@@ -118,8 +114,13 @@ export class CMHome extends moduleConnect(LitElement) {
     this.initialMember = result.data.me.agent.isInitialMember;
     this.minVouches = result.data.minVouches;
 
+    if (result.data.me.balance != 0) this.selectedSectionIndex = 0;
+    else this.selectedSectionIndex = 2;
+
     this.addEventListener('offer-accepted', (e) => {
-      this.selectedTabIndex = 0;
+      this.showSnackbar('Transaction completed', () => {
+        this.selectedSectionIndex = 0;
+      });
     });
   }
 
@@ -131,15 +132,25 @@ export class CMHome extends moduleConnect(LitElement) {
   }
 
   renderContent() {
-    if (this.selectedTabIndex === 3) {
-      return html`<hcst-agent-list></hcst-agent-list>`;
-    } else if (this.selectedTabIndex === 2) {
+    if (this.selectedSectionIndex === 3) {
+      return html`<hcst-agent-list
+        agentFilter="only-non-joined"
+        @vouched-for-agent=${(e) =>
+          this.showSnackbar(
+            `Successfully vouched for @${e.detail.agent.username}`,
+            null
+          )}
+      ></hcst-agent-list>`;
+    } else if (this.selectedSectionIndex === 2) {
       return html`
         <hcmc-allowed-creditor-list
-          @offer-created=${() => (this.selectedTabIndex = 1)}
+          @offer-created=${() =>
+            this.showSnackbar(`Succesfully created offer`, () => {
+              this.selectedSectionIndex = 1;
+            })}
         ></hcmc-allowed-creditor-list>
       `;
-    } else if (this.selectedTabIndex === 0) {
+    } else if (this.selectedSectionIndex === 0) {
       return html` <hccm-balance class="fill column"></hccm-balance>`;
     } else {
       return html`<hccm-offers class="fill column"></hccm-offers>`;
@@ -152,10 +163,11 @@ export class CMHome extends moduleConnect(LitElement) {
         <span>
           Welcome to the Holochain Community Currency Experiment!<br /><br />
           To join the network of creditors, you need to
-          <strong
-            >receive ${this.minVouches} vouches from members who are already in
-            the network.</strong
-          ><br /><br />
+          <strong>
+            receive ${this.minVouches} vouches from members who are already in
+            the network.
+          </strong>
+          <br /><br />
           When you have received the vouches, go to the "Creditors" tab and make
           and offer!
         </span>
@@ -163,11 +175,22 @@ export class CMHome extends moduleConnect(LitElement) {
     `;
   }
 
+  showSnackbar(message: string, callback: () => any) {
+    this.snackMessage = message;
+    this.snackCallback = callback;
+
+    this.snackbar.show();
+  }
+
   renderSnackbar() {
     return html`<mwc-snackbar id="snackbar" .labelText=${this.snackMessage}>
-      <mwc-button slot="action" @click=${() => this.snackCallback()}
-        >SEE</mwc-button
-      >
+      ${this.snackCallback
+        ? html`
+            <mwc-button slot="action" @click=${() => this.snackCallback()}>
+              SEE
+            </mwc-button>
+          `
+        : html``}
       <mwc-icon-button icon="close" slot="dismiss"></mwc-icon-button>
     </mwc-snackbar> `;
   }
@@ -180,38 +203,45 @@ export class CMHome extends moduleConnect(LitElement) {
           <span slot="title">Holochain community currency</span>
 
           <mwc-icon-button
+            slot="actionItems"
             icon="help"
             @click=${() => (this.help.open = true)}
           ></mwc-icon-button>
         </mwc-top-app-bar-fixed>
 
-        <mwc-tab-bar
-          .activeIndex=${this.selectedTabIndex}
-          @MDCTabBar:activated=${(e) =>
-            (this.selectedTabIndex = e.detail.index)}
-        >
-          <mwc-tab label="Balance"> </mwc-tab>
-          <mwc-tab label="Offers"></mwc-tab>
-          <mwc-tab label="Creditors"> </mwc-tab>
-          <mwc-tab label="Membrane"> </mwc-tab>
-        </mwc-tab-bar>
-
-        <div class="content column padding" style="flex: 1;">
-          ${this.minVouches === undefined
-            ? html`<div class="fill row center-content">
-                <mwc-circular-progress></mwc-circular-progress>
-              </div> `
-            : html`
-                <mwc-card
-                  style="width: 100%;"
-                  class=${this.selectedTabIndex === 0 ? 'fill' : ''}
+        <mwc-drawer>
+          <mwc-list>
+            ${this.sections.map(
+              (section, index) => html`
+                <mwc-list-item
+                  .selected=${this.selectedSectionIndex === index}
+                  .activated=${this.selectedSectionIndex === index}
+                  @click=${() => (this.selectedSectionIndex = index)}
+                  >${section}</mwc-list-item
                 >
-                  <div class="padding fill column">
-                    ${this.renderContent()}
-                  </div>
-                </mwc-card>
-              `}
-        </div>
+              `
+            )}
+          </mwc-list>
+          <div slot="appContent">
+            <div class="content column padding" style="flex: 1;">
+              ${this.minVouches === undefined
+                ? html`<div class="fill row center-content">
+                    <mwc-circular-progress></mwc-circular-progress>
+                  </div> `
+                : html`
+                    <mwc-card
+                      style="width: 100%;"
+                      class=${this.selectedSectionIndex === 0 ? 'fill' : ''}
+                    >
+                      <div class="padding fill column">
+                        ${this.renderContent()}
+                      </div>
+                    </mwc-card>
+                  `}
+            </div>
+          </div>
+        </mwc-drawer>
+
       </div>
     `;
   }

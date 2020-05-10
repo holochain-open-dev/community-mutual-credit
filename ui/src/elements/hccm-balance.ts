@@ -41,14 +41,17 @@ export class CMBalance extends moduleConnect(LitElement) {
 
   render() {
     if (this.balance === undefined)
-      return html`<mwc-circular-progress></mwc-circular-progress>`;
+      return html`<div class="row fill padding center-content">
+        <mwc-circular-progress></mwc-circular-progress>
+      </div>`;
 
     return html` <div class="row fill padding">
       <div style="flex-basis: 500px;" class="column center-content">
         <div class="column">
           <span class="title" style="margin-bottom: 8px;">Your balance</span>
           <span class="balance"
-            >${`${this.balance > 0 ? '+' : ''}${this.balance.toFixed(1)}`} credits</span
+            >${`${this.balance > 0 ? '+' : ''}${this.balance.toFixed(1)}`}
+            credits</span
           >
         </div>
       </div>

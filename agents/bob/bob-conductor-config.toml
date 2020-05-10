@@ -1,0 +1,57 @@
+bridges = []
+persistence_dir = ''
+ui_bundles = []
+ui_interfaces = []
+
+[[agents]]
+id = 'bob-agent'
+name = 'bob'
+public_address = 'HcSCjvyaY5Mkzazdcx655IY6X54uMmVRsfK8x4mms8FT8n7gsEGqzpf3I4xc6ci'
+keystore_file = './bob.key'
+
+[[dnas]]
+file = '../dnas/lobby/dist/lobby.dna.json'
+hash = 'QmbuQ5Ec1ERJGWWTf9VoPSnB2XH4ErEM6Q9PJ3Lwf8akw2'
+id = 'lobby-dna'
+
+[[dnas]]
+file = '../dnas/community-currency/dist/community-currency.dna.json'
+hash = 'QmZuH6bdTuxXaCa8M8km42b617QXfjxTEmchVpqwTLVdUV'
+id = 'mutual-credit-dna'
+
+[[instances]]
+agent = 'bob-agent'
+dna = 'lobby-dna'
+id = 'lobby-instance'
+
+[instances.storage]
+type = 'memory'
+
+[[interfaces]]
+admin = true
+id = 'websocket-interface'
+
+[[interfaces.instances]]
+id = 'lobby-instance'
+
+[interfaces.driver]
+port = 8889
+type = 'websocket'
+
+[logger]
+state_dump = true
+type = 'debug'
+
+[logger.rules]
+rules = []
+
+[passphrase_service]
+type = 'cmd'
+
+[signals]
+consistency = false
+trace = false
+
+[network]
+type = "sim2h"
+sim2h_url = "ws://localhost:9000"
