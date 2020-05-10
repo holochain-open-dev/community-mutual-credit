@@ -55,6 +55,10 @@ export class CMBalance extends moduleConnect(LitElement) {
           >
         </div>
       </div>
+      <span
+        style="width: 1px; background-color: rgba(0, 0, 0, 0.38); opacity: 0.4; margin: 32px 16px;"
+      ></span>
+
       <div class="column fill">
         <span class="title" style="margin-bottom: 20px;"
           >Transaction history</span

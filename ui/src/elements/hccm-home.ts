@@ -15,6 +15,8 @@ import {
   HolochainConnection,
   HolochainConnectionModule,
 } from '@uprtcl/holochain-provider';
+import { VouchedAgent } from 'holochain-social-triangulation';
+import { classMap } from 'lit-html/directives/class-map';
 
 export class CMHome extends moduleConnect(LitElement) {
   @query('#help')
@@ -28,11 +30,18 @@ export class CMHome extends moduleConnect(LitElement) {
   @property()
   snackCallback: () => any;
 
-  sections = ['Balance', 'Offers', 'Creditors', 'Membrane'];
+  sections = [
+    { name: 'Balance', icon: 'account_balance_wallet' },
+    { name: 'Offers', icon: 'ballot' },
+    { name: 'Creditors', icon: 'contacts' },
+    { name: 'Membrane', icon: 'group_work' },
+  ];
 
   @property({ type: Number })
   selectedSectionIndex: number = 2;
 
+  @property({ type: Object })
+  me: { agent: VouchedAgent };
   @property({ type: Number })
   minVouches: number = undefined;
   @property({ type: Number })
@@ -49,9 +58,14 @@ export class CMHome extends moduleConnect(LitElement) {
           --mdc-theme-primary: white;
         }
 
-        .content {
+        .big-content {
           margin: 24px;
-          width: 1200px;
+          width: 1400px;
+          align-self: center;
+        }
+        .small-content {
+          margin: 24px;
+          width: 1000px;
           align-self: center;
         }
 
@@ -110,6 +124,7 @@ export class CMHome extends moduleConnect(LitElement) {
       `,
     });
 
+    this.me = result.data.me;
     this.vouchesCount = result.data.me.agent.vouchesCount;
     this.initialMember = result.data.me.agent.isInitialMember;
     this.minVouches = result.data.minVouches;
@@ -198,50 +213,72 @@ export class CMHome extends moduleConnect(LitElement) {
   render() {
     return html`
       ${this.renderSnackbar()} ${this.renderHelp()}
-      <div class="column shell-container">
-        <mwc-top-app-bar-fixed>
-          <span slot="title">Holochain community currency</span>
+      ${
+        this.minVouches === undefined
+          ? html`<div class="fill row center-content">
+              <mwc-circular-progress></mwc-circular-progress>
+            </div>`
+          : html`
+              <div class="column shell-container">
+                <mwc-top-app-bar-fixed>
+                  <span slot="title">Holochain community currency</span>
 
-          <mwc-icon-button
-            slot="actionItems"
-            icon="help"
-            @click=${() => (this.help.open = true)}
-          ></mwc-icon-button>
-        </mwc-top-app-bar-fixed>
+                  <mwc-icon-button
+                    slot="actionItems"
+                    icon="help"
+                    @click=${() => (this.help.open = true)}
+                  ></mwc-icon-button>
+                </mwc-top-app-bar-fixed>
 
-        <mwc-drawer>
-          <mwc-list>
-            ${this.sections.map(
-              (section, index) => html`
-                <mwc-list-item
-                  .selected=${this.selectedSectionIndex === index}
-                  .activated=${this.selectedSectionIndex === index}
-                  @click=${() => (this.selectedSectionIndex = index)}
-                  >${section}</mwc-list-item
-                >
-              `
-            )}
-          </mwc-list>
-          <div slot="appContent">
-            <div class="content column padding" style="flex: 1;">
-              ${this.minVouches === undefined
-                ? html`<div class="fill row center-content">
-                    <mwc-circular-progress></mwc-circular-progress>
-                  </div> `
-                : html`
-                    <mwc-card
-                      style="width: 100%;"
-                      class=${this.selectedSectionIndex === 0 ? 'fill' : ''}
+                <mwc-drawer>
+                  <mwc-list>
+                    <mwc-list-item twoline noninteractive>
+                      <span>@${this.me.agent.username}</span>
+                      <span slot="secondary">${this.me.agent.id}</span>
+                    </mwc-list-item>
+                    <li
+                      divider
+                      role="separator"
+                      style="margin-bottom: 8px;"
+                    ></li>
+
+                    ${this.sections.map(
+                      (section, index) => html`
+                        <mwc-list-item
+                          graphic="avatar"
+                          .selected=${this.selectedSectionIndex === index}
+                          .activated=${this.selectedSectionIndex === index}
+                          @click=${() => (this.selectedSectionIndex = index)}
+                        >
+                          <span>${section.name}</span>
+                          <mwc-icon slot="graphic">${section.icon}</mwc-icon>
+                        </mwc-list-item>
+                      `
+                    )}
+                  </mwc-list>
+                  <div slot="appContent" class="column center-content">
+                    <div
+                      class=${classMap({
+                        column: true,
+                        padding: true,
+                        'small-content': this.selectedSectionIndex > 1,
+                        'big-content': this.selectedSectionIndex <= 1,
+                      })}
                     >
-                      <div class="padding fill column">
-                        ${this.renderContent()}
-                      </div>
-                    </mwc-card>
-                  `}
-            </div>
-          </div>
-        </mwc-drawer>
-
+                      <mwc-card
+                        style="width: 100%;"
+                        class=${this.selectedSectionIndex === 0 ? 'fill' : ''}
+                      >
+                        <div class="padding fill column">
+                          ${this.renderContent()}
+                        </div>
+                      </mwc-card>
+                    </div>
+                  </div>
+                </mwc-drawer>
+              </div>
+            `
+      }
       </div>
     `;
   }

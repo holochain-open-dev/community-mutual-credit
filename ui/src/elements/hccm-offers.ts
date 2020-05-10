@@ -14,16 +14,22 @@ export class CMOffers extends moduleConnect(LitElement) {
 
   render() {
     return html`
-      <div class="row fill" style="min-height: 400px;">
+      <div class="row fill" style="min-height: 350px;">
         <hcmc-pending-offer-list
           style="flex-basis: 40%;"
           @offer-selected=${(e) =>
             (this.selectedTransactionId = e.detail.transactionId)}
         ></hcmc-pending-offer-list>
+        <span
+          style="width: 1px; background-color: rgba(0, 0, 0, 0.38); opacity: 0.4; margin: 16px;"
+        ></span>
+
         ${this.selectedTransactionId
           ? html`
               <hcmc-offer-detail
+                style="align-self: center;"
                 class="column fill padding"
+                @offer-completed=${() => (this.selectedTransactionId = null)}
                 @offer-canceled=${() => (this.selectedTransactionId = null)}
                 .transactionId=${this.selectedTransactionId}
               ></hcmc-offer-detail>
