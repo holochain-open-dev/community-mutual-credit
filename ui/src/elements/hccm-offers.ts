@@ -32,7 +32,7 @@ export class CMOffers extends moduleConnect(LitElement) {
                   <hcmc-offer-detail
                     style="align-self: center; min-height: 286px;"
                     class="column fill padding"
-                    @offer-completed=${() =>
+                    @offer-accepted=${() =>
                       (this.selectedTransactionId = null)}
                     @offer-canceled=${() => (this.selectedTransactionId = null)}
                     .transactionId=${this.selectedTransactionId}
