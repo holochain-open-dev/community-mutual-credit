@@ -45,8 +45,8 @@ export class CMBalance extends moduleConnect(LitElement) {
         <mwc-circular-progress></mwc-circular-progress>
       </div>`;
 
-    return html` <div class="row fill padding">
-      <div style="flex-basis: 500px;" class="column center-content">
+    return html` <div class="column fill padding">
+      <div style="flex-basis: 150px;" class="column center-content">
         <div class="column">
           <span class="title" style="margin-bottom: 8px;">Your balance</span>
           <span class="balance"
@@ -59,12 +59,14 @@ export class CMBalance extends moduleConnect(LitElement) {
         style="width: 1px; background-color: rgba(0, 0, 0, 0.38); opacity: 0.4; margin: 32px 16px;"
       ></span>
 
-      <div class="column fill">
-        <span class="title" style="margin-bottom: 20px;"
-          >Transaction history</span
-        >
-        <hcmc-transaction-list></hcmc-transaction-list>
-      </div>
+      <mwc-card class="fill" style="width: 1000px; align-self: center;">
+        <div class="column fill padding">
+          <span class="title" style="margin-bottom: 8px;"
+            >Transaction history</span
+          >
+          <hcmc-transaction-list></hcmc-transaction-list>
+        </div>
+      </mwc-card>
     </div>`;
   }
 }

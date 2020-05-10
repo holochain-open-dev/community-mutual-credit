@@ -17,7 +17,7 @@ export const sharedStyles = css`
   }
 
   .padding {
-    padding: 16px;
+    padding: 24px;
   }
 
   .shell-container {

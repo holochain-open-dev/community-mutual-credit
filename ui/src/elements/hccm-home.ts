@@ -60,7 +60,6 @@ export class CMHome extends moduleConnect(LitElement) {
 
         .big-content {
           margin: 24px;
-          width: 1400px;
           align-self: center;
         }
         .small-content {
@@ -72,6 +71,13 @@ export class CMHome extends moduleConnect(LitElement) {
         .content > hccm-balance {
           display: flex;
           flex: 1;
+        }
+
+        .drawer-list {
+          position: fixed;
+          width: 320px;
+          background: white;
+          height: 100%;
         }
       `,
     ];
@@ -148,22 +154,28 @@ export class CMHome extends moduleConnect(LitElement) {
 
   renderContent() {
     if (this.selectedSectionIndex === 3) {
-      return html`<hcst-agent-list
-        agentFilter="only-non-joined"
-        @vouched-for-agent=${(e) =>
-          this.showSnackbar(
-            `Successfully vouched for @${e.detail.agent.username}`,
-            null
-          )}
-      ></hcst-agent-list>`;
+      return html` <mwc-card>
+        <hcst-agent-list
+          class="padding"
+          agentFilter="only-non-joined"
+          @vouched-for-agent=${(e) =>
+            this.showSnackbar(
+              `Successfully vouched for @${e.detail.agent.username}`,
+              null
+            )}
+        ></hcst-agent-list>
+      </mwc-card>`;
     } else if (this.selectedSectionIndex === 2) {
       return html`
-        <hcmc-allowed-creditor-list
-          @offer-created=${() =>
-            this.showSnackbar(`Succesfully created offer`, () => {
-              this.selectedSectionIndex = 1;
-            })}
-        ></hcmc-allowed-creditor-list>
+        <mwc-card>
+          <hcmc-allowed-creditor-list
+            class="padding"
+            @offer-created=${() =>
+              this.showSnackbar(`Succesfully created offer`, () => {
+                this.selectedSectionIndex = 1;
+              })}
+          ></hcmc-allowed-creditor-list>
+        </mwc-card>
       `;
     } else if (this.selectedSectionIndex === 0) {
       return html` <hccm-balance class="fill column"></hccm-balance>`;
@@ -174,18 +186,41 @@ export class CMHome extends moduleConnect(LitElement) {
 
   renderHelp() {
     return html`
-      <mwc-dialog id="help">
+      <mwc-dialog
+        id="help"
+        heading="Welcome to the Holochain Community Currency Experiment!"
+      >
         <span>
-          Welcome to the Holochain Community Currency Experiment!<br /><br />
-          To join the network of creditors, you need to
-          <strong>
-            receive ${this.minVouches} vouches from members who are already in
-            the network.
-          </strong>
-          <br /><br />
-          When you have received the vouches, go to the "Creditors" tab and make
-          and offer!
+          These are the sections available in this experiment:
         </span>
+
+        <ul>
+          <li>
+            <strong>Balance</strong>: here you can see your overall credit
+            balance and your transaction history.
+          </li>
+          <br />
+          <li>
+            <strong>Offers</strong>: here you can see all pending offers from/to
+            other creditors.
+          </li>
+          <br />
+          <li>
+            <strong>Creditors</strong>: here you can see a list of agents with
+            which you can begin an offer.
+          </li>
+          <br />
+          <li>
+            <strong>Membrane</strong>: here you can see the list of agents who
+            have not joined the network yet, but want to. If you vouch for them,
+            they will be one step closer to joining.
+          </li>
+        </ul>
+        <mwc-button
+          label="Got it!"
+          dialogAction="ok"
+          slot="primaryAction"
+        ></mwc-button>
       </mwc-dialog>
     `;
   }
@@ -219,19 +254,17 @@ export class CMHome extends moduleConnect(LitElement) {
               <mwc-circular-progress></mwc-circular-progress>
             </div>`
           : html`
-              <div class="column shell-container">
-                <mwc-top-app-bar-fixed>
-                  <span slot="title">Holochain community currency</span>
+              <mwc-top-app-bar-fixed class="shell-container">
+                <span slot="title">Holochain community currency</span>
 
-                  <mwc-icon-button
-                    slot="actionItems"
-                    icon="help"
-                    @click=${() => (this.help.open = true)}
-                  ></mwc-icon-button>
-                </mwc-top-app-bar-fixed>
+                <mwc-icon-button
+                  slot="actionItems"
+                  icon="help"
+                  @click=${() => (this.help.open = true)}
+                ></mwc-icon-button>
 
-                <mwc-drawer>
-                  <mwc-list>
+                <mwc-drawer style="width: 100vw;">
+                  <mwc-list class="drawer-list">
                     <mwc-list-item twoline noninteractive>
                       <span>@${this.me.agent.username}</span>
                       <span slot="secondary">${this.me.agent.id}</span>
@@ -265,18 +298,11 @@ export class CMHome extends moduleConnect(LitElement) {
                         'big-content': this.selectedSectionIndex <= 1,
                       })}
                     >
-                      <mwc-card
-                        style="width: 100%;"
-                        class=${this.selectedSectionIndex === 0 ? 'fill' : ''}
-                      >
-                        <div class="padding fill column">
-                          ${this.renderContent()}
-                        </div>
-                      </mwc-card>
+                      ${this.renderContent()}
                     </div>
                   </div>
                 </mwc-drawer>
-              </div>
+              </mwc-top-app-bar-fixed>
             `
       }
       </div>
