@@ -57,6 +57,9 @@ export class CMHome extends moduleConnect(LitElement) {
         mwc-top-app-bar-fixed mwc-icon-button {
           --mdc-theme-primary: white;
         }
+        mwc-top-app-bar-fixed {
+          --mdc-theme-primary: #E64A19;
+        }
 
         .big-content {
           margin: 24px;
@@ -263,7 +266,7 @@ export class CMHome extends moduleConnect(LitElement) {
                   @click=${() => (this.help.open = true)}
                 ></mwc-icon-button>
 
-                <mwc-drawer style="width: 100vw;">
+                <mwc-drawer style="width: 100vw; --mdc-theme-primary: #536DFE;">
                   <mwc-list class="drawer-list">
                     <mwc-list-item twoline noninteractive>
                       <span>@${this.me.agent.username}</span>
