@@ -7,7 +7,7 @@ const webpack = require('webpack');
 module.exports = {
   output: {
     filename: 'main.bundle.js',
-    path: path.resolve(__dirname, 'dist-pages'),
+    path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
     symlinks: true,

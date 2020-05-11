@@ -23,13 +23,16 @@ export class CMLogin extends moduleConnect(LitElement) {
         {
           me {
             id
-            hasJoined
+            agent {
+              id
+              isInitialMember
+            }
           }
         }
       `,
     });
 
-    if (result.data.me.hasJoined) {
+    if (result.data.me.agent.isInitialMember) {
       await this.client.mutate({
         mutation: JOIN_NETWORK,
         variables: {

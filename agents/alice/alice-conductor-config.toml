@@ -15,16 +15,8 @@ id = 'lobby-dna'
 
 [[dnas]]
 file = '../../dnas/community-currency/dist/community-currency.dna.json'
-hash = 'QmZuH6bdTuxXaCa8M8km42b617QXfjxTEmchVpqwTLVdUV'
-id = 'mutual-credit-dna'
-
-[[instances]]
-agent = 'alice-agent'
-dna = 'mutual-credit-dna'
-id = 'mutual-credit-instance'
-
-[instances.storage]
-type = 'memory'
+hash = 'QmbMLgCrZBKqaxM3ygmGa73GuSGx9ptQted2sFdLHDcKmc'
+id = 'mutual-credit-template'
 
 [[instances]]
 agent = 'alice-agent'
@@ -40,14 +32,6 @@ id = 'websocket-interface'
 
 [[interfaces.instances]]
 id = 'lobby-instance'
-
-[[interfaces.instances]]
-id = 'mutual-credit-instance'
-
-[[bridges]]
-caller_id = "lobby-instance"
-callee_id = "mutual-credit-instance"
-handle = "remote-bridge"
 
 [interfaces.driver]
 port = 8888

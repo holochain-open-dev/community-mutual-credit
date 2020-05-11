@@ -22,6 +22,12 @@ import { CMDisallowed } from './elements/hccm-disallowed';
 (async function () {
   const connection = new HolochainConnection({
     host: process.env.WS_INTERFACE,
+    devEnv: {
+      templateDnasPaths: {
+        QmbMLgCrZBKqaxM3ygmGa73GuSGx9ptQted2sFdLHDcKmc:
+          '../../dnas/community-currency/dist/community-currency.dna.json',
+      },
+    },
   });
 
   const orchestrator = new MicroOrchestrator();
@@ -31,8 +37,17 @@ import { CMDisallowed } from './elements/hccm-disallowed';
     new i18nextBaseModule(),
     new ApolloClientModule(),
     new SocialTriangulationModule(
-      'mutual-credit-instance',
-      'mutual-credit-dna',
+      {
+        instance: 'mutual-credit-instance',
+        dnaId: 'mutual-credit-dna',
+        properties: {
+          initial_members: [
+            'HcSCipJrCpZzn5ga45eP9K3qhxHJiabtszGX6nsOkfkdtgeaVc7ydBeIXagn7pr',
+          ],
+          necessary_vouches: 1,
+        },
+        templateDnaAddress: 'QmbMLgCrZBKqaxM3ygmGa73GuSGx9ptQted2sFdLHDcKmc',
+      },
       'lobby-instance',
       'remote-bridge'
     ),

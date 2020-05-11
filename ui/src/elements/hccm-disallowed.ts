@@ -20,7 +20,11 @@ export class CMDisallowed extends moduleConnect(LitElement) {
 
   async firstUpdated() {
     this.client = this.request(ApolloClientModule.bindings.Client);
+    this.loadVouches();
+  }
 
+  async loadVouches() {
+    this.me = undefined;
     const result = await this.client.query({
       query: gql`
         {
@@ -58,7 +62,7 @@ export class CMDisallowed extends moduleConnect(LitElement) {
   }
 
   getText() {
-    if (!this.minVouches)
+    if (!this.me.agent.vouchesCount)
       return html`Could not retrieve how many vouches you have<br />since there
         are no online agents inside the network.`;
     if (this.isAllowed())
@@ -80,11 +84,16 @@ export class CMDisallowed extends moduleConnect(LitElement) {
                 </strong>
               </span>
 
-              <span
-                style="font-size: 18px; margin-bottom: 22px; text-align: center;"
-              >
-                ${this.getText()}
-              </span>
+              <div class="row center-content" style="margin-bottom: 22px;">
+                <span style="font-size: 18px; text-align: center;">
+                  ${this.getText()}
+                </span>
+
+                <mwc-icon-button
+                  icon="refresh"
+                  @click=${() => this.loadVouches()}
+                ></mwc-icon-button>
+              </div>
 
               <mwc-button
                 raised

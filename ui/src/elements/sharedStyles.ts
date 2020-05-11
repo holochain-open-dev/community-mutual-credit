@@ -40,9 +40,11 @@ export const sharedStyles = css`
 
   .background {
     z-index: 0;
+    opacity: 0.5;
     position: fixed;
     height: 100vh;
     width: 100vw;
     background-image: url(/assets/background.jpg);
+    background-image: url(/background.jpg);
   }
 `;
