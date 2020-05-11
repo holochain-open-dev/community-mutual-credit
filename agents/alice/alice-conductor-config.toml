@@ -24,7 +24,8 @@ dna = 'lobby-dna'
 id = 'lobby-instance'
 
 [instances.storage]
-type = 'memory'
+path = 'storage/lobby-instance'
+type = 'lmdb'
 
 [[interfaces]]
 admin = true
@@ -52,5 +53,5 @@ consistency = false
 trace = false
 
 [network]
-sim2h_url = 'ws://localhost:9000'
+sim2h_url = 'ws://public-v4.sim2h.net:9000'
 type = 'sim2h'

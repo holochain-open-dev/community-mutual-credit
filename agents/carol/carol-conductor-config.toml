@@ -15,9 +15,9 @@ hash = 'QmYF9JC7hbBqyThch4jRooXrXgh9EkgbDnTTQeRZ8mVvxQ'
 id = 'lobby-dna'
 
 [[dnas]]
-file = '../../dnas/community-currency/dist/community-currency.dna.json'
-hash = 'QmbMLgCrZBKqaxM3ygmGa73GuSGx9ptQted2sFdLHDcKmc'
-id = 'mutual-credit-template'
+file = './community-currency.dna.json'
+hash = 'QmQbFPcpQgmfN76synENo7nrH1KrXycU2Z1mYU7dQF7Mo9'
+id = 'mutual-credit-dna'
 
 [[instances]]
 agent = 'carol-agent'
@@ -25,7 +25,17 @@ dna = 'lobby-dna'
 id = 'lobby-instance'
 
 [instances.storage]
-type = 'memory'
+path = 'storage/lobby-instance'
+type = 'lmdb'
+
+[[instances]]
+agent = 'carol-agent'
+dna = 'mutual-credit-dna'
+id = 'mutual-credit-instance'
+
+[instances.storage]
+path = 'storage/mutual-credit-instance'
+type = 'lmdb'
 
 [[interfaces]]
 admin = true
@@ -33,6 +43,9 @@ id = 'websocket-interface'
 
 [[interfaces.instances]]
 id = 'lobby-instance'
+
+[[interfaces.instances]]
+id = 'mutual-credit-instance'
 
 [interfaces.driver]
 port = 8890
@@ -54,4 +67,4 @@ trace = false
 
 [network]
 type = "sim2h"
-sim2h_url = "ws://localhost:9000"
+sim2h_url = 'ws://public-v4.sim2h.net:9000'
