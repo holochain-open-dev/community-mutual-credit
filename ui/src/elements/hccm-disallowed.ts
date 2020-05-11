@@ -70,27 +70,31 @@ export class CMDisallowed extends moduleConnect(LitElement) {
   }
 
   render() {
-    return html`<div class="fill column center-content">
-      ${this.me
-        ? html`
-            <span style="font-size: 24px; margin-bottom: 18px;">
-              <strong>
-                Welcome, @${this.me.agent.username}!
-              </strong>
-            </span>
+    return html` <div class="background"></div>
+      <div class="fill column center-content" style="z-index: 1;">
+        ${this.me
+          ? html`
+              <span style="font-size: 42px; margin-bottom: 22px;">
+                <strong>
+                  Welcome, @${this.me.agent.username}!
+                </strong>
+              </span>
 
-            <span style="font-size: 18px; margin-bottom: 18px; text-align: center;">
-              ${this.getText()}
-            </span>
+              <span
+                style="font-size: 18px; margin-bottom: 22px; text-align: center;"
+              >
+                ${this.getText()}
+              </span>
 
-            <mwc-button
-              raised
-              label="JOIN NETWORK"
-              .disabled=${!this.isAllowed()}
-              @click=${() => this.joinNetwork()}
-            ></mwc-button>
-          `
-        : html`<mwc-circular-progress></mwc-circular-progress>`}
-    </div>`;
+              <mwc-button
+                raised
+                style="--mdc-theme-primary: #536DFE;"
+                label="JOIN NETWORK"
+                .disabled=${!this.isAllowed()}
+                @click=${() => this.joinNetwork()}
+              ></mwc-button>
+            `
+          : html`<mwc-circular-progress></mwc-circular-progress>`}
+      </div>`;
   }
 }

@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, css } from 'lit-element';
 import { ApolloClient, gql } from 'apollo-boost';
 import { sharedStyles } from './sharedStyles';
 import { moduleConnect } from '@uprtcl/micro-orchestrator';
@@ -45,14 +45,19 @@ export class CMLogin extends moduleConnect(LitElement) {
 
   render() {
     return html`
-      <div class="column center-content">
+      <div class="background"></div>
+
+      <div
+        class="column center-content"
+        style="z-index: 1;"
+      >
         <span
-          style="font-weight: bold; font-size: 48px; width: 600px; text-align: center; margin-bottom: 80px;"
+          style="font-weight: bold; font-size: 48px; width: 600px; text-align: center; margin-bottom: 64px;"
           >Holochain Community Mutual-Credit Experiment</span
         >
 
         <hcpf-set-username
-          style="width: 400px; margin-bottom: 80px;"
+          style="width: 400px; margin-bottom: 80px; --mdc-theme-primary: #536DFE;"
           @username-set=${() => this.joinNetwork()}
         ></hcpf-set-username>
       </div>

@@ -37,4 +37,12 @@ export const sharedStyles = css`
     font-weight: bold;
     font-size: 18px;
   }
+
+  .background {
+    z-index: 0;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-image: url(/assets/background.jpg);
+  }
 `;

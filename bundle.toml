@@ -1,0 +1,16 @@
+
+bridges = []
+
+[[instances]]
+name = "lobby"
+id = "lobby"
+dna_hash = "QmXMkVAApazyxHvMe3tMamEnMkNwBB8dRHXc4D3bfLbtZ2"
+uri = "file:./dnas/lobby/dist/lobby.dna.json"
+
+[[UIs]]
+name = "Community Currency"
+uri = "file:./ui/dist/ui.zip"
+
+[[UIs.instance_references]]
+ui_handle = "lobby-instance"
+instance_id = "lobby"
