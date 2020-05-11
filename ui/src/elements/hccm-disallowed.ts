@@ -40,6 +40,7 @@ export class CMDisallowed extends moduleConnect(LitElement) {
           minVouches
         }
       `,
+      fetchPolicy: 'network-only',
     });
 
     this.minVouches = result.data.minVouches;
