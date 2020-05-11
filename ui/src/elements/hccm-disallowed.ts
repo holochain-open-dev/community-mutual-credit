@@ -69,7 +69,7 @@ export class CMDisallowed extends moduleConnect(LitElement) {
     if (this.isAllowed())
       return html`You already have ${this.me.agent.vouchesCount} vouches! Go
       ahead and join the network.`;
-    return html`You only have ${this.me.agent.vouchesCount} vouches, but you
+    return html`You only have ${this.me.agent.vouchesCount || 0} vouches, but you
       need ${this.minVouches} to enter the network. <br />
       Ask some agents already inside the network to vouch for you!`;
   }
