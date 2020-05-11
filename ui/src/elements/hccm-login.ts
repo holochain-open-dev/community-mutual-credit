@@ -4,6 +4,7 @@ import { sharedStyles } from './sharedStyles';
 import { moduleConnect } from '@uprtcl/micro-orchestrator';
 import { ApolloClientModule } from '@uprtcl/graphql';
 import { JOIN_NETWORK } from 'holochain-social-triangulation';
+import { Router } from '@vaadin/router';
 
 export class CMLogin extends moduleConnect(LitElement) {
   client!: ApolloClient<any>;
@@ -36,9 +37,9 @@ export class CMLogin extends moduleConnect(LitElement) {
         },
       });
 
-      window.location.href = '/home';
+      Router.go('/home');
     } else {
-      window.location.href = '/disallowed';
+      Router.go('/disallowed');
     }
   }
 

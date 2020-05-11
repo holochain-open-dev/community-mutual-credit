@@ -4,6 +4,7 @@ import { ApolloClientModule } from '@uprtcl/graphql';
 import { ApolloClient, gql } from 'apollo-boost';
 import { sharedStyles } from './sharedStyles';
 import { VouchedAgent, JOIN_NETWORK } from 'holochain-social-triangulation';
+import { Router } from '@vaadin/router';
 
 export class CMDisallowed extends moduleConnect(LitElement) {
   @property()
@@ -49,7 +50,7 @@ export class CMDisallowed extends moduleConnect(LitElement) {
       },
     });
 
-    window.location.href = '/home';
+    Router.go('/home');
   }
 
   isAllowed() {
