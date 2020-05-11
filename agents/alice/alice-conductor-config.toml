@@ -35,7 +35,7 @@ id = 'websocket-interface'
 id = 'lobby-instance'
 
 [interfaces.driver]
-port = 443
+port = 8888
 type = 'websocket'
 
 [logger]
