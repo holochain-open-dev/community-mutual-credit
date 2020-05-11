@@ -5,17 +5,17 @@ bridges = []
 name = "mutual-credit"
 id = "mutual-credit-template"
 dna_hash = "QmbMLgCrZBKqaxM3ygmGa73GuSGx9ptQted2sFdLHDcKmc"
-uri = "file:./dnas/community-currency/dist/community-currency.dna.json"
+uri = "https://github.com/holochain-open-dev/community-mutual-credit/releases/download/test-0/community-currency.dna.json"
 
 [[instances]]
 name = "lobby"
 id = "lobby"
 dna_hash = "QmYF9JC7hbBqyThch4jRooXrXgh9EkgbDnTTQeRZ8mVvxQ"
-uri = "file:./dnas/lobby/dist/lobby.dna.json"
+uri = "https://github.com/holochain-open-dev/community-mutual-credit/releases/download/test-0/lobby.dna.json"
 
 [[UIs]]
 name = "Community Currency"
-uri = "file:./ui/dist/ui.zip"
+uri = "https://github.com/holochain-open-dev/community-mutual-credit/releases/download/test-0/ui.zip"
 
 [[UIs.instance_references]]
 ui_handle = "lobby-instance"
