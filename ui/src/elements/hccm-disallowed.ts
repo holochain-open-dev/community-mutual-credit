@@ -62,7 +62,7 @@ export class CMDisallowed extends moduleConnect(LitElement) {
   }
 
   getText() {
-    if (!this.me.agent.vouchesCount)
+    if (this.me.agent.vouchesCount === undefined)
       return html`Could not retrieve how many vouches you have<br />since there
         are no online agents inside the network.`;
     if (this.isAllowed())
