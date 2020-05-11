@@ -42,7 +42,7 @@ import { CMDisallowed } from './elements/hccm-disallowed';
         dnaId: 'mutual-credit-dna',
         properties: {
           initial_members: [
-            'HcSCipJrCpZzn5ga45eP9K3qhxHJiabtszGX6nsOkfkdtgeaVc7ydBeIXagn7pr',
+            'HcSCipJrCpZzn5ga45eP9K3qhxHJiabtszGX6nsOkfkdtgeaVc7ydBeIXagn7pr'
           ],
           necessary_vouches: 1,
         },
