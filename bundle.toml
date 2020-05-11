@@ -2,7 +2,7 @@
 bridges = []
 
 [[instances]]
-name = "mutual-credit--template"
+name = "mutual-credit-template"
 id = "mutual-credit-template"
 dna_hash = "QmbMLgCrZBKqaxM3ygmGa73GuSGx9ptQted2sFdLHDcKmc"
 uri = "https://github.com/holochain-open-dev/community-mutual-credit/releases/download/test-0/community-currency.dna.json"
