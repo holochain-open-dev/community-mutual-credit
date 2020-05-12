@@ -3,10 +3,15 @@ ui_bundles = []
 ui_interfaces = []
 
 [[agents]]
-id = 'alice-agent'
-name = 'alice'
-public_address = 'HcSCipJrCpZzn5ga45eP9K3qhxHJiabtszGX6nsOkfkdtgeaVc7ydBeIXagn7pr'
-keystore_file = './alice.key'
+id = 'bob-agent'
+keystore_file = './bob.key'
+name = 'bob'
+public_address = 'HcSCjvyaY5Mkzazdcx655IY6X54uMmVRsfK8x4mms8FT8n7gsEGqzpf3I4xc6ci'
+
+[[bridges]]
+callee_id = 'mutual-credit-instance'
+caller_id = 'lobby-instance'
+handle = 'remote-bridge'
 
 [[dnas]]
 file = '../../dnas/lobby/dist/lobby.dna.json'
@@ -18,13 +23,27 @@ file = '../../dnas/community-currency/dist/community-currency.dna.json'
 hash = 'QmYQhdVYtb75n9Ex2qAPMXDiGFw21jQPkZWyT6TtLTFUYw'
 id = 'mutual-credit-template'
 
+[[dnas]]
+file = 'dna/QmQu2JqAEC4iNpEyg4yX5g7jgns1i26RhVSx1VHdVQAjk4.dna.json'
+hash = 'QmQu2JqAEC4iNpEyg4yX5g7jgns1i26RhVSx1VHdVQAjk4'
+id = 'mutual-credit-dna'
+
 [[instances]]
-agent = 'alice-agent'
+agent = 'bob-agent'
 dna = 'lobby-dna'
 id = 'lobby-instance'
 
 [instances.storage]
 path = 'storage/lobby-instance'
+type = 'lmdb'
+
+[[instances]]
+agent = 'bob-agent'
+dna = 'mutual-credit-dna'
+id = 'mutual-credit-instance'
+
+[instances.storage]
+path = 'storage/mutual-credit-instance'
 type = 'lmdb'
 
 [[interfaces]]
@@ -34,8 +53,11 @@ id = 'websocket-interface'
 [[interfaces.instances]]
 id = 'lobby-instance'
 
+[[interfaces.instances]]
+id = 'mutual-credit-instance'
+
 [interfaces.driver]
-port = 8888
+port = 8889
 type = 'websocket'
 
 [logger]
@@ -45,13 +67,13 @@ type = 'debug'
 [logger.rules]
 rules = []
 
+[network]
+sim2h_url = 'ws://localhost:9000'
+type = 'sim2h'
+
 [passphrase_service]
 type = 'cmd'
 
 [signals]
 consistency = false
 trace = false
-
-[network]
-sim2h_url = 'ws://localhost:9000'
-type = 'sim2h'

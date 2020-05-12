@@ -134,7 +134,7 @@ export class CMDisallowed extends moduleConnect(LitElement) {
               <div class="column center-content">
                 <mwc-circular-progress></mwc-circular-progress>
                 ${this.joining
-                  ? html`<span>Cloning DNA and joining network....</span>`
+                  ? html`<span style="margin-top: 16px;">Cloning DNA and joining network....</span>`
                   : html``}
               </div>
             `}

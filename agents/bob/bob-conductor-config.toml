@@ -16,7 +16,7 @@ id = 'lobby-dna'
 
 [[dnas]]
 file = '../../dnas/community-currency/dist/community-currency.dna.json'
-hash = 'QmbMLgCrZBKqaxM3ygmGa73GuSGx9ptQted2sFdLHDcKmc'
+hash = 'QmYQhdVYtb75n9Ex2qAPMXDiGFw21jQPkZWyT6TtLTFUYw'
 id = 'mutual-credit-template'
 
 [[instances]]
@@ -55,4 +55,4 @@ trace = false
 
 [network]
 type = "sim2h"
-sim2h_url = 'ws://public-v4.sim2h.net:9000'
+sim2h_url = 'ws://localhost:9000'

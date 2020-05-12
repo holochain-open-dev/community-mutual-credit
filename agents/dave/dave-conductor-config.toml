@@ -1,12 +1,13 @@
+bridges = []
 persistence_dir = ''
 ui_bundles = []
 ui_interfaces = []
 
 [[agents]]
-id = 'alice-agent'
-name = 'alice'
-public_address = 'HcSCipJrCpZzn5ga45eP9K3qhxHJiabtszGX6nsOkfkdtgeaVc7ydBeIXagn7pr'
-keystore_file = './alice.key'
+id = 'dave-agent'
+name = 'dave'
+public_address = 'HcSCjV5iKJ4OCnnawe4Rc4RctSdvo8y39QA3xP68E84vwzmwjiJhoDjIwt39csi'
+keystore_file = './dave.key'
 
 [[dnas]]
 file = '../../dnas/lobby/dist/lobby.dna.json'
@@ -19,7 +20,7 @@ hash = 'QmYQhdVYtb75n9Ex2qAPMXDiGFw21jQPkZWyT6TtLTFUYw'
 id = 'mutual-credit-template'
 
 [[instances]]
-agent = 'alice-agent'
+agent = 'dave-agent'
 dna = 'lobby-dna'
 id = 'lobby-instance'
 
@@ -35,7 +36,7 @@ id = 'websocket-interface'
 id = 'lobby-instance'
 
 [interfaces.driver]
-port = 8888
+port = 8891
 type = 'websocket'
 
 [logger]
@@ -53,5 +54,5 @@ consistency = false
 trace = false
 
 [network]
+type = "sim2h"
 sim2h_url = 'ws://localhost:9000'
-type = 'sim2h'
