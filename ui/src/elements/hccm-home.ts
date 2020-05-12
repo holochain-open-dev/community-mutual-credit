@@ -58,7 +58,7 @@ export class CMHome extends moduleConnect(LitElement) {
           --mdc-theme-primary: white;
         }
         mwc-top-app-bar-fixed {
-          --mdc-theme-primary: #E64A19;
+          --mdc-theme-primary: #e64a19;
         }
 
         .big-content {
@@ -145,6 +145,13 @@ export class CMHome extends moduleConnect(LitElement) {
       this.showSnackbar('Transaction completed', () => {
         this.selectedSectionIndex = 0;
       });
+    });
+
+    this.addEventListener('offer-failed-to-accept', () => {
+      this.showSnackbar(
+        "Could not accept offer, counterparty's chain moved. Verify new state and accept again.",
+        null
+      );
     });
   }
 
@@ -267,7 +274,10 @@ export class CMHome extends moduleConnect(LitElement) {
                 ></mwc-icon-button>
 
                 <mwc-drawer style="width: 100vw; --mdc-theme-primary: #536DFE;">
-                  <mwc-list class="drawer-list" style="box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.2);">
+                  <mwc-list
+                    class="drawer-list"
+                    style="box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.2);"
+                  >
                     <mwc-list-item twoline noninteractive>
                       <span>@${this.me.agent.username}</span>
                       <span slot="secondary">${this.me.agent.id}</span>
