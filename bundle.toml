@@ -14,7 +14,7 @@ dna_hash = "QmYF9JC7hbBqyThch4jRooXrXgh9EkgbDnTTQeRZ8mVvxQ"
 uri = "https://github.com/holochain-open-dev/community-mutual-credit/releases/download/test-0/lobby.dna.json"
 
 [[UIs]]
-name = "Community Currency"
+name = "Community Mutual-Credit"
 uri = "https://github.com/holochain-open-dev/community-mutual-credit/releases/download/test-0/ui.zip"
 
 [[UIs.instance_references]]
