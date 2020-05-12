@@ -6,7 +6,7 @@ ui_interfaces = []
 [[agents]]
 id = 'port-agent'
 name = 'port'
-public_address = 'HcScI7RDXHw38Seyv4suZM77Whrtdex7vn4E4hFOSz53M63tM5Nc9Qf3mxFnvea'
+public_address = 'HcSCjB8984OI3EI4AoEdNskSbr59qr6n83hI6Gk6CCFntdt7h8tfmS3ozphwj4z'
 keystore_file = './port.key'
 
 [[dnas]]
@@ -16,7 +16,7 @@ id = 'lobby-dna'
 
 [[dnas]]
 file = './community-currency.dna.json'
-hash = 'QmfDzJRnkrnZx6Cd7UsKszS7xPMxshuYCaMfqNMcchppvt'
+hash = 'QmRPQpPk99u9UWzY6KZryz9L6wzrVXKoHNyUMhPRcK1etK'
 id = 'mutual-credit-dna'
 
 [[instances]]
