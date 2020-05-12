@@ -48,7 +48,7 @@ import { CMDisallowed } from './elements/hccm-disallowed';
           ],
           necessary_vouches: 2,
         },
-        templateDnaAddress: 'QmbMLgCrZBKqaxM3ygmGa73GuSGx9ptQted2sFdLHDcKmc',
+        templateDnaAddress: 'QmXAfJ2kWkP191V3CRmonKpJRpqHvUVGa7CbL4F8jiojTy',
       },
       'lobby-instance',
       'remote-bridge'
