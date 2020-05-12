@@ -39,6 +39,7 @@ export class CMDisallowed extends moduleConnect(LitElement) {
             agent {
               id
               username
+              isInitialMember
               vouchesCount
             }
             hasJoined
@@ -73,7 +74,11 @@ export class CMDisallowed extends moduleConnect(LitElement) {
   }
 
   isAllowed() {
-    return this.minVouches > 0 && this.me.agent.vouchesCount >= this.minVouches;
+    return (
+      this.minVouches > 0 &&
+      (this.me.agent.vouchesCount >= this.minVouches ||
+        this.me.agent.isInitialMember)
+    );
   }
 
   getText() {
@@ -100,9 +105,9 @@ export class CMDisallowed extends moduleConnect(LitElement) {
               </span>
 
               ${this.joiningError
-                ? html`<span
+                ? html`<span style="margin-bottom: 22px;  width: 500px; text-align: center;"
                     >There was an error while joining the network:
-                    ${this.joiningError}. Did you forget to install with admin
+                    ${this.joiningError}. <br><br>Did you forget to install with admin
                     interface? If so, reinstall the app with the admin interface
                     activated.</span
                   >`
@@ -134,7 +139,9 @@ export class CMDisallowed extends moduleConnect(LitElement) {
               <div class="column center-content">
                 <mwc-circular-progress></mwc-circular-progress>
                 ${this.joining
-                  ? html`<span style="margin-top: 16px;">Cloning DNA and joining network....</span>`
+                  ? html`<span style="margin-top: 16px;"
+                      >Cloning DNA and joining network....</span
+                    >`
                   : html``}
               </div>
             `}

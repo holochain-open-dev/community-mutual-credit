@@ -24,7 +24,7 @@ import { CMDisallowed } from './elements/hccm-disallowed';
     host: process.env.WS_INTERFACE,
     devEnv: {
       templateDnasPaths: {
-        QmbMLgCrZBKqaxM3ygmGa73GuSGx9ptQted2sFdLHDcKmc:
+        QmXAfJ2kWkP191V3CRmonKpJRpqHvUVGa7CbL4F8jiojTy:
           '../../dnas/community-currency/dist/community-currency.dna.json',
       },
     },
