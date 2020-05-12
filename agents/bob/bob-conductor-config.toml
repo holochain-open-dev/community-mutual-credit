@@ -55,4 +55,4 @@ trace = false
 
 [network]
 type = "sim2h"
-sim2h_url = 'ws://localhost:9000'
+sim2h_url = 'ws://public-v4.sim2h.net:9000'
