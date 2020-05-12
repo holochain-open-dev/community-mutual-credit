@@ -10,9 +10,9 @@
     "start:carol": "WS_INTERFACE=ws://localhost:8890 webpack-dev-server --mode=development --open --port 8002",
     "dev": "concurrently \"npm run hc:start\" \"npm start\"",
     "hc:start": "concurrently \"sim2h_server\" \"npm run hc:alice\" \"npm run hc:bob\" \"npm run hc:carol\"",
-    "hc:alice": "cd ../agents/alice && rimraf storage && holochain -c alice-conductor-config.toml",
-    "hc:bob": "cd ../agents/bob && rimraf storage && holochain -c bob-conductor-config.toml",
-    "hc:carol": "cd ../agents/carol && rimraf storage && holochain -c carol-conductor-config.toml"
+    "hc:alice": "cd ../agents/alice && rimraf dna conductor-config.toml storage && holochain -c alice-conductor-config.toml",
+    "hc:bob": "cd ../agents/bob && rimraf dna conductor-config.toml storage && holochain -c bob-conductor-config.toml",
+    "hc:carol": "cd ../agents/carol && rimraf dna conductor-config.toml storage && holochain -c carol-conductor-config.toml"
   },
   "dependencies": {
     "@authentic/mwc-card": "^0.9.0",
