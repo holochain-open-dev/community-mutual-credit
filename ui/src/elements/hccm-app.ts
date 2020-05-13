@@ -49,7 +49,6 @@ export class CMApp extends moduleConnect(LitElement) {
             agent {
               id
               username
-              vouchesCount
               isInitialMember
             }
             hasJoined
