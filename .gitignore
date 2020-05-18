@@ -3,5 +3,4 @@ target/
 .hc
 .cargo
 *.mdb
-storage/
 dna/
