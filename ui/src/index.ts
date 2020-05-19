@@ -42,12 +42,11 @@ import { CMDisallowed } from './elements/hccm-disallowed';
         dnaId: 'mutual-credit-dna',
         properties: {
           initial_members: [
-            'HcSCipJrCpZzn5ga45eP9K3qhxHJiabtszGX6nsOkfkdtgeaVc7ydBeIXagn7pr',
-            'HcSCjvyaY5Mkzazdcx655IY6X54uMmVRsfK8x4mms8FT8n7gsEGqzpf3I4xc6ci',
-            'HcSCI4JD7ZU43yYaotU95gXInhpjysgpmZfcqyxk3prqmsexaICAZofer3gmumr',
-            'HcScI7RDXHw38Seyv4suZM77Whrtdex7vn4E4hFOSz53M63tM5Nc9Qf3mxFnvea',
-            'HcSciQj88o3pR9xxjxwNeSbq8S6Iff8ed7aW7NTim5y9fcrv7pQIi9EHMxmurzi',
-            'HcSCjB8984OI3EI4AoEdNskSbr59qr6n83hI6Gk6CCFntdt7h8tfmS3ozphwj4z',
+            'HcSciEq88wZuM35y7kGCGD5MKDIddrk445PGkA54twy67x5t5jmXcdg9rgk4b5z',
+            'HcSCJe7gAAdboumfp3ozByh5H9xdym3juGPcsysG7yxhh58ivUuKNzVtofcd7hr',
+            'HcScIBT43BGxfz6ehifdWC8bi4Uu8awkwHAhZgXm8izefuxqTPaoqdnbqb3raor',
+            'HcScigUzSbX9ebpo73yr8TqiWN9Cfwkvx65NCZO7tS7GNtr8Rf3YyY6XxPtyvia',
+            'HcSCiKEIwHhb7nteiiYTeczvYvvj7ztzynpEB6qGQwohqpf9m4drDb5DH4sgs8i',
           ],
           necessary_vouches: 2,
         },

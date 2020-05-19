@@ -1,0 +1,79 @@
+persistence_dir = ''
+ui_bundles = []
+ui_interfaces = []
+
+[[agents]]
+id = 'alice-agent'
+keystore_file = './alice.key'
+name = 'alice'
+public_address = 'HcSciEq88wZuM35y7kGCGD5MKDIddrk445PGkA54twy67x5t5jmXcdg9rgk4b5z'
+
+[[bridges]]
+callee_id = 'mutual-credit-instance'
+caller_id = 'lobby-instance'
+handle = 'remote-bridge'
+
+[[dnas]]
+file = '../../dnas/lobby/dist/lobby.dna.json'
+hash = 'QmQFbugQYw8XAWCmfKAEDTXJ9MkbxEqKrA3J4wrotbgjJy'
+id = 'lobby-dna'
+
+[[dnas]]
+file = '../../dnas/community-currency/dist/community-currency.dna.json'
+hash = 'QmXAfJ2kWkP191V3CRmonKpJRpqHvUVGa7CbL4F8jiojTy'
+id = 'mutual-credit-template'
+
+[[dnas]]
+file = 'dna/QmY5xA6Phx52QD9xVnK6ShbuFVJKCpqfaCpasrkhkHux3F.dna.json'
+hash = 'QmY5xA6Phx52QD9xVnK6ShbuFVJKCpqfaCpasrkhkHux3F'
+id = 'mutual-credit-dna'
+
+[[instances]]
+agent = 'alice-agent'
+dna = 'lobby-dna'
+id = 'lobby-instance'
+
+[instances.storage]
+path = 'storage/lobby-instance'
+type = 'lmdb'
+
+[[instances]]
+agent = 'alice-agent'
+dna = 'mutual-credit-dna'
+id = 'mutual-credit-instance'
+
+[instances.storage]
+path = 'storage/mutual-credit-instance'
+type = 'lmdb'
+
+[[interfaces]]
+admin = true
+id = 'websocket-interface'
+
+[[interfaces.instances]]
+id = 'lobby-instance'
+
+[[interfaces.instances]]
+id = 'mutual-credit-instance'
+
+[interfaces.driver]
+port = 8888
+type = 'websocket'
+
+[logger]
+state_dump = true
+type = 'debug'
+
+[logger.rules]
+rules = []
+
+[network]
+sim2h_url = 'ws://public-v4.sim2h.net:9000'
+type = 'sim2h'
+
+[passphrase_service]
+type = 'cmd'
+
+[signals]
+consistency = false
+trace = false
