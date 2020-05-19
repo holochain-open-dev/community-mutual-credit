@@ -58,7 +58,7 @@ id = 'mutual-credit-instance'
 
 [interfaces.driver]
 port = 8888
-type = 'websocket'
+type = 'http'
 
 [logger]
 state_dump = true

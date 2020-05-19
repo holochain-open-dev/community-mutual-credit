@@ -10,7 +10,7 @@ uri = "https://github.com/holochain-open-dev/community-mutual-credit/releases/do
 [[instances]]
 name = "lobby-instance"
 id = "lobby-instance"
-dna_hash = "QmYF9JC7hbBqyThch4jRooXrXgh9EkgbDnTTQeRZ8mVvxQ"
+dna_hash = "QmQFbugQYw8XAWCmfKAEDTXJ9MkbxEqKrA3J4wrotbgjJy"
 uri = "https://github.com/holochain-open-dev/community-mutual-credit/releases/download/test-0/lobby.dna.json"
 
 [[UIs]]
