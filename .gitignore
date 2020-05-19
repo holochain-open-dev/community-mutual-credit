@@ -2,4 +2,3 @@ node_modules/
 target/
 .hc
 .cargo
-dna/
